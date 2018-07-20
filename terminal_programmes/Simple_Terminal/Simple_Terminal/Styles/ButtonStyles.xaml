@@ -10,6 +10,7 @@
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="1,5,1,5" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -33,7 +34,10 @@
         </Style.Setters>
         
         <Style.Triggers>
-            
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Red" />
+                <Setter Property="Foreground" Value="White" />
+            </Trigger>
         </Style.Triggers>
     </Style>
 

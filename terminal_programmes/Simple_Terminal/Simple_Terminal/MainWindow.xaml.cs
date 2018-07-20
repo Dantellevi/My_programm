@@ -27,7 +27,7 @@ namespace Simple_Terminal
 
         private void closeWindow_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
 
         private void maxWindow_Click(object sender, RoutedEventArgs e)
