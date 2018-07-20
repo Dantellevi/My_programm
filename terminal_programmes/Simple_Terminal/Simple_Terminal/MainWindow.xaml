@@ -5,8 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Simple_Terminal"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        WindowStyle="None"
+        BorderThickness="0"
+        Background="#3f4d63"
+        Title="Терминальная программа" Height="600" Width="800">
+
+    <Grid x:Name="mainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="13*" />
+        </Grid.RowDefinitions>
+
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3.8*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                <Image x:Name="TitleIcon" Width="40"  Height="40"  />
+                <TextBlock Text="Терминальная программа" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <Button x:Name="visWindow" Click="visWindow_Click" Style="{StaticResource button_Title}" Content="__" Width="55" />
+                <Button x:Name="maxWindow" Click="maxWindow_Click" Style="{StaticResource button_Title}" Content="s" Width="55" />
+                <Button x:Name="closeWindow" Click="closeWindow_Click" Content="X" Style="{StaticResource button_Title}" Width="55" />
+            </StackPanel>
+        </Grid>
+
     </Grid>
+
 </Window>

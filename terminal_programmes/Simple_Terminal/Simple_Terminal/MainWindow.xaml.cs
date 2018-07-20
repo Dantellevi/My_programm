@@ -24,5 +24,20 @@ namespace Simple_Terminal
         {
             InitializeComponent();
         }
+
+        private void closeWindow_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void maxWindow_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void visWindow_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
