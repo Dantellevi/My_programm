@@ -7,13 +7,13 @@
         mc:Ignorable="d"
        
         BorderThickness="0"
-        Background="#3f4d63"
-        Title="Терминальная программа" Height="600" Width="800">
+        Background="#0911a0"
+        Title="Терминальная программа" Height="600" Width="900">
 
     <Grid x:Name="mainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="13*" />
+            <RowDefinition Height="8*" />
         </Grid.RowDefinitions>
 
 
@@ -23,10 +23,89 @@
             </Grid.RowDefinitions>
 
             <Expander Grid.Row="0" >
-              
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                        <TextBlock Text="Имя порта:" Style="{StaticResource Texblocklabel}" />
+                        <ComboBox x:Name="ComboPortName">
+                            
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                        <TextBlock Text="Скорость в бодах:" Style="{StaticResource Texblocklabel}" />
+                        <ComboBox x:Name="ComboBaudSpeed">
+
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" Orientation="Vertical">
+                        <TextBlock Text="Бит четности:" Style="{StaticResource Texblocklabel}" />
+                        <ComboBox x:Name="ComboParityBit">
+
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Grid.Column="3" Orientation="Vertical">
+                        <TextBlock Text="Стоп бит:" Style="{StaticResource Texblocklabel}"/>
+                        <ComboBox x:Name="ComboStopBit">
+
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="4" Orientation="Vertical">
+                        <TextBlock Text="Формат данных:" Style="{StaticResource Texblocklabel}"/>
+                        <ComboBox x:Name="ComboFormatData">
+
+                        </ComboBox>
+                    </StackPanel>
+                    <Button x:Name="ConnectBtn" Grid.Column="5" Content="Подключение" Style="{StaticResource buttonConnection}" />
+
+
+                </Grid>
+                
             </Expander>
+
+           
             
         </Grid>
+        <TabControl Grid.Row="1" Background="#0911a0">
+            <TabItem Header="Терминал">
+                <Grid x:Name="terminalGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="9*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="StringFormatData" Width="390" Style="{StaticResource TextBoxTerminal}" ></TextBox>
+                        <TextBox x:Name="HextFormatData" Width="250" Style="{StaticResource TextBoxTerminal}" ></TextBox>
+                        <TextBox x:Name="BINFormatData" Width="210" Style="{StaticResource TextBoxTerminal}" ></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" >
+                        <Button x:Name="Command_K1" Content="K1" Width="50" />
+                        <Button x:Name="Command_K2" Content="K2" Width="50" />
+                        <Button x:Name="Command_K4" Content="K4" Width="50" />
+                        <Button x:Name="Command_Typr" Content="tупр." Width="50" />
+                        <Button x:Name="Command_PK" Content="ПК" Width="50" />
+                        <Button x:Name="Command_NP" Content="НП" Width="50" />
+                        <Button x:Name="Command_BPG" Content="БПГ" Width="50" />
+                        <Button x:Name="Command_OK" Content="ОК" Width="50" />
+                        <Button x:Name="Command_PC_off" Content="Откл.ПЦ" Width="50" />
+                        <Button x:Name="Command_KCY" Content="КЦУ" Width="50" />
+                        <Button x:Name="Command_Fpol" Content="ОЦУ.Фпол." Width="65" />
+                        <TextBox x:Name="TextCommand" Margin="10,5,1,5" Width="200" />
+                        <Button x:Name="SendCommand" Margin="5,5,5,5" Content=">" Width="100" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Графики">построение графиков!!!!!</TabItem>
+            <TabItem Header="Диагностика сигналов">Поля со значениями с АЦП и ЦАП</TabItem>
+        </TabControl>
 
     </Grid>
 
