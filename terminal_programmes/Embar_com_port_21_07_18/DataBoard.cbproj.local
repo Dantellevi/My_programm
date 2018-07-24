@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.717,=D:\Work\Embarcadero_projects\Embar_com_port_02_05_18\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.618,D:\Work\Embarcadero_projects\Embar_com_port_02_05_18\Threads.cpp=D:\Work\Embarcadero_projects\Embar_com_port_02_05_18\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.930,C:\Users\Khramov\Documents\Embarcadero\Studio\Projects\Project1.cbproj=D:\!!!Work\Программы верхнего уровня для обмена с ПК\Embar_com_port\Project1.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.632,C:\Users\Khramov\Documents\Embarcadero\Studio\Projects\Unit1.h=D:\!!!Work\Программы верхнего уровня для обмена с ПК\Embar_com_port\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.791,D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\DataBoardPCH1.h=D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.520,D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\ControllerClass.h=D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.488,D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\Controller.h=D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\ControllerClass.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.354,D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\Form.dfm=D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.618,D:\Work\Embarcadero_projects\Embar_com_port_02_05_18\Threads.h=D:\Work\Embarcadero_projects\Embar_com_port_02_05_18\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.362,D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\DataStream.h=D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\DataStreamClass.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.630,D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\DataStreamClass.h=D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.354,D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\Form.h=D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.354,D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\Form.cpp=D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.520,D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\ControllerClass.cpp=D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.630,D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\DataStreamClass.cpp=D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.488,D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\Controller.cpp=D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\ControllerClass.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.067,=D:\Work\Embarcadero_projects\Embar_com_port_1_07_04_18\Unit2.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.088,=C:\Users\Khramov\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.632,C:\Users\Khramov\Documents\Embarcadero\Studio\Projects\Unit1.cpp=D:\!!!Work\Программы верхнего уровня для обмена с ПК\Embar_com_port\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.362,D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\DataStream.cpp=D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\DataStreamClass.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.231,=D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.073,=C:\Users\Khramov\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.399,C:\Users\Khramov\Documents\Embarcadero\Studio\Projects\Project1PCH1.h=D:\!!!Work\Программы верхнего уровня для обмена с ПК\Embar_com_port\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.803,D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\DataBoard.cbproj=D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\Project1.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.632,C:\Users\Khramov\Documents\Embarcadero\Studio\Projects\Unit1.dfm=D:\!!!Work\Программы верхнего уровня для обмена с ПК\Embar_com_port\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.615,=D:\Work\Embarcadero_projects\Embar_com_port_27_04_18\Unit1.cpp</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="DataBoard.cpp"/>
+    <File Path="DataBoardPCH1.h"/>
+    <File Path="Form.cpp"/>
+    <File Path="Form.cpp"/>
+    <File Path="Form.dfm"/>
+    <File Path="Form.h"/>
+    <File Path="Controller.cpp"/>
+    <File Path="Controller.cpp"/>
+    <File Path="Controller.h"/>
+    <File Path="DataStream.cpp"/>
+    <File Path="DataStream.cpp"/>
+    <File Path="DataStream.h"/>
+    <File Path="Threads.cpp"/>
+    <File Path="Threads.cpp"/>
+    <File Path="Threads.h"/>
+  </ProjectSortOrder>
+</BorlandProject>

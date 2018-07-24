@@ -58,8 +58,8 @@
                 <Setter Property="FontSize" Value="18" />
                 <Setter Property="FontWeight" Value="UltraBold" />
                 <Setter Property="Margin" Value="5,1,5,1" />
-                <Setter Property="Background" Value="##4a0384" />
-                <Setter Property="Foreground" Value="##cbfca4" />
+                <Setter Property="Background" Value="#4a0384" />
+                <Setter Property="Foreground" Value="#FF182549" />
             </Trigger>
         </Style.Triggers>
         

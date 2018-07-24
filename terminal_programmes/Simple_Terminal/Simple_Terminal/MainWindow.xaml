@@ -64,7 +64,7 @@
 
                         </ComboBox>
                     </StackPanel>
-                    <Button x:Name="ConnectBtn" Grid.Column="5" Content="Подключение" Style="{StaticResource buttonConnection}" />
+                    <Button x:Name="ConnectBtn" Grid.Column="5" Content="Подключение" Style="{StaticResource buttonConnection}" Click="ConnectBtn_Click" />
 
 
                 </Grid>
@@ -82,9 +82,9 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="StringFormatData" Width="390" Style="{StaticResource TextBoxTerminal}" ></TextBox>
-                        <TextBox x:Name="HextFormatData" Width="250" Style="{StaticResource TextBoxTerminal}" ></TextBox>
-                        <TextBox x:Name="BINFormatData" Width="210" Style="{StaticResource TextBoxTerminal}" ></TextBox>
+                        <TextBox x:Name="StringFormatData" IsReadOnly="True" Width="390" Style="{StaticResource TextBoxTerminal}" ></TextBox>
+                        <TextBox x:Name="HextFormatData" IsReadOnly="True" Width="250" Style="{StaticResource TextBoxTerminal}" ></TextBox>
+                        <TextBox x:Name="BINFormatData"  Width="210" Style="{StaticResource TextBoxTerminal}" ></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" >
                         <Button x:Name="Command_K1" Content="K1" Width="50" />
