@@ -23,15 +23,14 @@ namespace Simple_Terminal
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<string> ListnamePort;
-        private List<int> ListBaud;
-        private List<int> ListparityBit;
-        private List<int> ListFormat;
-        private List<string> ListStopBit;
-
+        private List<string> ListnamePort;//список для хранения имен портов
+        private List<int> ListBaud;//список для хранения скоростей
+        private List<int> ListparityBit;//список для выбора бита четности
+        private List<int> ListFormat;//список для выбора формата данных
+        private List<string> ListStopBit;//список для выбора стоп битов
         private int clicker=1;// переменная для хранения кол-ва нажатий
-
-
+            
+        private delegate void ReadStructData(IHH_Formata_Data data);
 
 
         private SerialPort _serialCOM=new SerialPort();
@@ -39,7 +38,11 @@ namespace Simple_Terminal
         public MainWindow()
         {
             InitializeComponent();
-            SetList_Data();
+            
+            IHH_Formata_Data dataFormat = new IHH_Formata_Data();//создание экземпляра  структуры
+            dataFormat.Initilice_Massive();// создание экземпляров массивов
+            SetList_Data();//Установка данных в комбобоксы
+
         }
 
 
@@ -150,6 +153,15 @@ namespace Simple_Terminal
 
 
 
+        /// <summary>
+        /// Метод закрытия порта
+        /// </summary>
+        private void Disconnect()
+        {
+            _serialCOM.Close();
+        }
+
+
         #endregion
 
 
@@ -167,17 +179,56 @@ namespace Simple_Terminal
             {
                 ConnectBtn.Content = "Открыть порт";
                 //вызываем функция разъединения
+                Disconnect();
 
             }
             else if(clicker%2==0)
             {
                 ConnectBtn.Content = "Уст.соединение";
                 //вызываем функцию установки соединения
+                Settings_COMPort();
+                try
+                {
+                    _serialCOM.Open();
+                    _serialCOM.DataReceived += _serialCOM_DataReceived;
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("Ошибка установки соединения" + ex.Message);
+                }
+
 
             }
         }
 
 
 
+
+        /// <summary>
+        /// Обработчик приема данных из порта
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _serialCOM_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            
+        }
+        
+        /// <summary>
+        /// Прием данных по принятой структуре
+        /// </summary>
+        /// <param name="Data"></param>
+        private void Receive_Data_struct(IHH_Formata_Data Data)
+        {
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //вызываем функция разъединения
+            Disconnect();
+            //производим закрытия окна
+            this.Close();
+        }
     }
 }

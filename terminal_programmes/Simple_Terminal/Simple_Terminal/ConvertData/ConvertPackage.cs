@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Simple_Terminal.ConvertData
+{
+    /// <summary>
+    /// Класс отвечающий за конвертирование пакета в hex  и bin формат и логирования
+    /// </summary>
+   public class ConvertPackage
+    {
+
+    }
+}

@@ -26,6 +26,28 @@ namespace Simple_Terminal
         }
 
 
+        /// <summary>
+        /// Метод конвертации структуры в массив байт
+        /// </summary>
+        /// <param name="dd"></param>
+        /// <returns></returns>
+        public byte[] ConvertInMassByte(IHH_Formata_Data dd)
+        {
+            return new byte[10];
+        }
+
+
+        /// <summary>
+        /// Метод конвертации из массива байт в структуру
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public IHH_Formata_Data ConvertStructData(ref byte[] data)
+        {
+            return new IHH_Formata_Data();
+        }
+
+
     }
 
 }

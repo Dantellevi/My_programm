@@ -8,12 +8,13 @@
        
         BorderThickness="0"
         Background="#0911a0"
-        Title="Терминальная программа" Height="600" Width="900">
+        Title="Терминальная программа" Height="700" Width="900" Closing="Window_Closing">
 
     <Grid x:Name="mainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="1*" />
             <RowDefinition Height="8*" />
+            <RowDefinition Height="0.5*" />
         </Grid.RowDefinitions>
 
 
@@ -98,15 +99,34 @@
                         <Button x:Name="Command_PC_off" Content="Откл.ПЦ" Width="50" />
                         <Button x:Name="Command_KCY" Content="КЦУ" Width="50" />
                         <Button x:Name="Command_Fpol" Content="ОЦУ.Фпол." Width="65" />
-                        <TextBox x:Name="TextCommand" Margin="10,5,1,5" Width="200" />
-                        <Button x:Name="SendCommand" Margin="5,5,5,5" Content=">" Width="100" />
+                        <TextBox x:Name="TextCommand" Margin="10,25,1,5" Width="200" />
+                        <Button x:Name="SendCommand" Margin="5,25,5,5" Content=">" Width="100" />
+                        
                     </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="Графики">построение графиков!!!!!</TabItem>
             <TabItem Header="Диагностика сигналов">Поля со значениями с АЦП и ЦАП</TabItem>
+            
         </TabControl>
 
+
+        <StatusBar x:Name="statusPan" Grid.Row="2" Background="Black" >
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Принятые байты:" Style="{StaticResource TextblockStatusBar}" ></Label>
+                <TextBlock x:Name="numberRessivebyte" Text="нуль" Height="17" Style="{StaticResource StatusBarData}"></TextBlock>
+                <Label Content="Отправленные байты:" Style="{StaticResource TextblockStatusBar}" />
+                <TextBlock x:Name="numberSendbyte" Text="нуль" Height="17" Style="{StaticResource StatusBarData}"></TextBlock>
+                <Label Content="Отправленные пакеты:" Style="{StaticResource TextblockStatusBar}" />
+                <TextBlock x:Name="numberSendPacket" Text="нуль" Height="17" Style="{StaticResource StatusBarData}"></TextBlock>
+                <Label Content="Принятые пакеты:" Style="{StaticResource TextblockStatusBar}" />
+                <TextBlock x:Name="numberRessivePacket" Text="нуль" Height="17" Style="{StaticResource StatusBarData}"></TextBlock>
+                <Label Content="Время работы:" Style="{StaticResource TextblockStatusBar}" />
+                <TextBlock x:Name="Timer_Work" Text="нуль" Height="17" Style="{StaticResource StatusBarData}"></TextBlock>
+            </StackPanel>
+           
+        </StatusBar>
+        
     </Grid>
 
 </Window>

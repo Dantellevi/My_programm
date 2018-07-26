@@ -22,5 +22,22 @@
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         </Style.Setters>
     </Style>
+
+    <Style x:Key="TextblockStatusBar" TargetType="Label">
+        <Style.Setters>
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Margin" Value="5,1,5,1" />
+        </Style.Setters>
+    </Style>
+
+
+    <Style x:Key="StatusBarData" TargetType="TextBlock">
+        <Style.Setters>
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Margin" Value="5,1,5,1" />
+        </Style.Setters>
+    </Style>
     
 </ResourceDictionary>
