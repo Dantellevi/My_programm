@@ -30,7 +30,7 @@ namespace Simple_Terminal
         private List<string> ListStopBit;//список для выбора стоп битов
         private int clicker=1;// переменная для хранения кол-ва нажатий
             
-        private delegate void ReadStructData(IHH_Formata_Data data);
+        private delegate void ReadStructData(byte[] DataCOM);
 
 
         private SerialPort _serialCOM=new SerialPort();
@@ -223,6 +223,11 @@ namespace Simple_Terminal
 
         }
 
+        /// <summary>
+        /// Метод закрытия порта и закрытия окна
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             //вызываем функция разъединения
@@ -230,5 +235,68 @@ namespace Simple_Terminal
             //производим закрытия окна
             this.Close();
         }
+
+        #region Команды отправки данных в COM
+        private void Command_K1_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Command_K2_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Command_K4_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Command_Typr_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Command_PK_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Command_NP_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Command_BPG_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Command_OK_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Command_PC_off_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Command_KCY_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Command_Fpol_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SendCommand_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        #endregion
     }
 }

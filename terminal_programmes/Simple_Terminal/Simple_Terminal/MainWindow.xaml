@@ -88,19 +88,19 @@
                         <TextBox x:Name="BINFormatData"  Width="210" Style="{StaticResource TextBoxTerminal}" ></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" >
-                        <Button x:Name="Command_K1" Content="K1" Width="50" />
-                        <Button x:Name="Command_K2" Content="K2" Width="50" />
-                        <Button x:Name="Command_K4" Content="K4" Width="50" />
-                        <Button x:Name="Command_Typr" Content="tупр." Width="50" />
-                        <Button x:Name="Command_PK" Content="ПК" Width="50" />
-                        <Button x:Name="Command_NP" Content="НП" Width="50" />
-                        <Button x:Name="Command_BPG" Content="БПГ" Width="50" />
-                        <Button x:Name="Command_OK" Content="ОК" Width="50" />
-                        <Button x:Name="Command_PC_off" Content="Откл.ПЦ" Width="50" />
-                        <Button x:Name="Command_KCY" Content="КЦУ" Width="50" />
-                        <Button x:Name="Command_Fpol" Content="ОЦУ.Фпол." Width="65" />
+                        <Button x:Name="Command_K1" Click="Command_K1_Click" Content="K1" Width="50" />
+                        <Button x:Name="Command_K2" Click="Command_K2_Click" Content="K2" Width="50" />
+                        <Button x:Name="Command_K4" Click="Command_K4_Click" Content="K4" Width="50" />
+                        <Button x:Name="Command_Typr" Click="Command_Typr_Click" Content="tупр." Width="50" />
+                        <Button x:Name="Command_PK" Click="Command_PK_Click" Content="ПК" Width="50" />
+                        <Button x:Name="Command_NP" Click="Command_NP_Click" Content="НП" Width="50" />
+                        <Button x:Name="Command_BPG" Click="Command_BPG_Click" Content="БПГ" Width="50" />
+                        <Button x:Name="Command_OK" Click="Command_OK_Click" Content="ОК" Width="50" />
+                        <Button x:Name="Command_PC_off" Click="Command_PC_off_Click" Content="Откл.ПЦ" Width="50" />
+                        <Button x:Name="Command_KCY" Click="Command_KCY_Click" Content="КЦУ" Width="50" />
+                        <Button x:Name="Command_Fpol" Click="Command_Fpol_Click" Content="ОЦУ.Фпол." Width="65" />
                         <TextBox x:Name="TextCommand" Margin="10,25,1,5" Width="200" />
-                        <Button x:Name="SendCommand" Margin="5,25,5,5" Content=">" Width="100" />
+                        <Button x:Name="SendCommand" Click="SendCommand_Click" Margin="5,25,5,5" Content=">" Width="100" />
                         
                     </StackPanel>
                 </Grid>
