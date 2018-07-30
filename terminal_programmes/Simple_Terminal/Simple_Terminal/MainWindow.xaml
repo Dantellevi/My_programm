@@ -82,11 +82,20 @@
                         <RowDefinition Height="9*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="StringFormatData" IsReadOnly="True" Width="390" Style="{StaticResource TextBoxTerminal}" ></TextBox>
-                        <TextBox x:Name="HextFormatData" IsReadOnly="True" Width="250" Style="{StaticResource TextBoxTerminal}" ></TextBox>
-                        <TextBox x:Name="BINFormatData"  Width="210" Style="{StaticResource TextBoxTerminal}" ></TextBox>
-                    </StackPanel>
+                    
+                        <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox x:Name="StringFormatData" Grid.Column="0" IsReadOnly="True" Margin="1,1,1,1" Style="{StaticResource TextBoxTerminal}" ></TextBox>
+                        <TextBox x:Name="HextFormatData" Grid.Column="1" IsReadOnly="True" Margin="1,1,1,1" Style="{StaticResource TextBoxTerminal}" ></TextBox>
+                        <TextBox x:Name="BINFormatData" Grid.Column="2"  Margin="1,1,1,1" Style="{StaticResource TextBoxTerminal}" ></TextBox>
+                    </Grid>
+                        
+                    
                     <StackPanel Orientation="Horizontal" Grid.Row="1" >
                         <Button x:Name="Command_K1" Click="Command_K1_Click" Content="K1" Width="50" />
                         <Button x:Name="Command_K2" Click="Command_K2_Click" Content="K2" Width="50" />
@@ -99,8 +108,12 @@
                         <Button x:Name="Command_PC_off" Click="Command_PC_off_Click" Content="Откл.ПЦ" Width="50" />
                         <Button x:Name="Command_KCY" Click="Command_KCY_Click" Content="КЦУ" Width="50" />
                         <Button x:Name="Command_Fpol" Click="Command_Fpol_Click" Content="ОЦУ.Фпол." Width="65" />
-                        <TextBox x:Name="TextCommand" Margin="10,25,1,5" Width="200" />
-                        <Button x:Name="SendCommand" Click="SendCommand_Click" Margin="5,25,5,5" Content=">" Width="100" />
+                        <StackPanel Orientation="Vertical">
+                            <CheckBox x:Name="ckeck_SelectMode" Checked="ckeck_SelectMode_Checked" Foreground="White" Content="Обычный терминал" Unchecked="ckeck_SelectMode_Unchecked" />
+                            <TextBox x:Name="TextCommand" IsReadOnly="True" Margin="10,10,1,5" Width="200" />
+                        </StackPanel>
+                        
+                        <Button x:Name="SendCommand" IsEnabled="False" Click="SendCommand_Click" Margin="5,25,5,5" Content=">" Width="100" />
                         
                     </StackPanel>
                 </Grid>

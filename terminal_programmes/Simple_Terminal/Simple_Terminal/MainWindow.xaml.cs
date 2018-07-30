@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Threading;
 using System.IO.Ports;
+using Simple_Terminal.ConvertData;
 
 namespace Simple_Terminal
 {
@@ -29,11 +30,12 @@ namespace Simple_Terminal
         private List<int> ListFormat;//список для выбора формата данных
         private List<string> ListStopBit;//список для выбора стоп битов
         private int clicker=1;// переменная для хранения кол-ва нажатий
-            
-        private delegate void ReadStructData(byte[] DataCOM);
+        private int[] StateCommand = new int[11];//состояние команд управлением платой     
+        private delegate void ReadStructData(byte[] DataCOM);//делегат для работы на прием данных
 
 
-        private SerialPort _serialCOM=new SerialPort();
+        private SerialPort _serialCOM=new SerialPort();//экземпляр СОМ терминала
+        ConvertPackage convData = new ConvertPackage();// экземпляр класса для конвертации структуры в массив и наоборот
 
         public MainWindow()
         {
@@ -42,6 +44,167 @@ namespace Simple_Terminal
             IHH_Formata_Data dataFormat = new IHH_Formata_Data();//создание экземпляра  структуры
             dataFormat.Initilice_Massive();// создание экземпляров массивов
             SetList_Data();//Установка данных в комбобоксы
+            InitStateButton();//инициализация состояний нажатий кнопок команд
+        }
+
+
+        /// <summary>
+        /// Метод инициализации состояний кнопок
+        /// </summary>
+        private void InitStateButton()
+        {
+            for(int i=0;i<StateCommand.Length;i++)
+            {
+                StateCommand[i] = 1;
+                if(i==9)
+                {
+                    StateCommand[i] =2;
+                }
+            }
+
+            if (StateCommand[0] % 2 == 0)
+            {
+                Command_K1.Background = new SolidColorBrush(Colors.Green);
+                Command_K1.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
+
+            }
+            else
+            {
+                Command_K1.Background = new SolidColorBrush(Colors.White);
+                Command_K1.Foreground = new SolidColorBrush(Colors.Black);
+            }
+            if (StateCommand[1] % 2 == 0)
+            {
+                Command_K2.Background = new SolidColorBrush(Colors.Green);
+                Command_K2.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
+
+            }
+            else
+            {
+                Command_K2.Background = new SolidColorBrush(Colors.White);
+                Command_K2.Foreground = new SolidColorBrush(Colors.Black);
+            }
+            if (StateCommand[2] % 2 == 0)
+            {
+                Command_K4.Background = new SolidColorBrush(Colors.Green);
+                Command_K4.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
+
+            }
+            else
+            {
+                Command_K4.Background = new SolidColorBrush(Colors.White);
+                Command_K4.Foreground = new SolidColorBrush(Colors.Black);
+            }
+
+            if (StateCommand[3] % 2 == 0)
+            {
+                Command_Typr.Background = new SolidColorBrush(Colors.Green);
+                Command_Typr.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
+
+            }
+            else
+            {
+                Command_Typr.Background = new SolidColorBrush(Colors.White);
+                Command_Typr.Foreground = new SolidColorBrush(Colors.Black);
+            }
+
+            if (StateCommand[4] % 2 == 0)
+            {
+                Command_PK.Background = new SolidColorBrush(Colors.Green);
+                Command_PK.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
+
+            }
+            else
+            {
+                Command_PK.Background = new SolidColorBrush(Colors.White);
+                Command_PK.Foreground = new SolidColorBrush(Colors.Black);
+            }
+
+            if (StateCommand[5] % 2 == 0)
+            {
+                Command_NP.Background = new SolidColorBrush(Colors.Green);
+                Command_NP.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
+
+            }
+            else
+            {
+                Command_NP.Background = new SolidColorBrush(Colors.White);
+                Command_NP.Foreground = new SolidColorBrush(Colors.Black);
+            }
+
+            if (StateCommand[6] % 2 == 0)
+            {
+                Command_BPG.Background = new SolidColorBrush(Colors.Green);
+                Command_BPG.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
+
+            }
+            else
+            {
+                Command_BPG.Background = new SolidColorBrush(Colors.White);
+                Command_BPG.Foreground = new SolidColorBrush(Colors.Black);
+            }
+
+
+            if (StateCommand[7] % 2 == 0)
+            {
+                Command_OK.Background = new SolidColorBrush(Colors.Green);
+                Command_OK.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
+
+            }
+            else
+            {
+                Command_OK.Background = new SolidColorBrush(Colors.White);
+                Command_OK.Foreground = new SolidColorBrush(Colors.Black);
+            }
+
+            if (StateCommand[8] % 2 == 0)
+            {
+                Command_PC_off.Background = new SolidColorBrush(Colors.Green);
+                Command_PC_off.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
+
+            }
+            else
+            {
+                Command_PC_off.Background = new SolidColorBrush(Colors.White);
+                Command_PC_off.Foreground = new SolidColorBrush(Colors.Black);
+            }
+
+            if (StateCommand[9] % 2 == 0)
+            {
+                Command_KCY.Background = new SolidColorBrush(Colors.Green);
+                Command_KCY.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
+
+            }
+            else
+            {
+                Command_KCY.Background = new SolidColorBrush(Colors.White);
+                Command_KCY.Foreground = new SolidColorBrush(Colors.Black);
+            }
+
+            if (StateCommand[10] % 2 == 0)
+            {
+                Command_Fpol.Background = new SolidColorBrush(Colors.Green);
+                Command_Fpol.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
+
+            }
+            else
+            {
+                Command_Fpol.Background = new SolidColorBrush(Colors.White);
+                Command_Fpol.Foreground = new SolidColorBrush(Colors.Black);
+            }
+
+
 
         }
 
@@ -215,12 +378,105 @@ namespace Simple_Terminal
         }
         
         /// <summary>
-        /// Прием данных по принятой структуре
+        /// Разнесение данных по полям окна по принятой стрктуре
         /// </summary>
         /// <param name="Data"></param>
         private void Receive_Data_struct(IHH_Formata_Data Data)
         {
 
+        }
+
+
+        #region Методы отображения принятых и отправленых данных в полях
+
+        /// <summary>
+        /// Метод отображения в поле текстбокса  данных отправляемых/принимаемых со структуры
+        /// </summary>
+        /// <param name="data"></param>
+        private void VisibleTextBox_Datastruct(IHH_Formata_Data data)
+        {
+
+        }
+
+        /// <summary>
+        /// Метод отображения в поле текстбокса  данных в виде HEX отправляемых/принимаемых со структуры
+        /// </summary>
+        /// <param name="data"></param>
+        private void VisibleTextBox_HEXDatastruct(IHH_Formata_Data data)
+        {
+
+        }
+
+        /// <summary>
+        /// Метод отображения в поле текстбокса  данных отправляемых/принимаемых ввид строки
+        /// </summary>
+        /// <param name="data"></param>
+        private void VisibleTextBox_Strings(string data)
+        {
+
+        }
+        
+
+        /// <summary>
+        /// Метод отображения в поле текстбокса  данных в виде HEX отправляемых/принимаемых ввиде строки
+        /// </summary>
+        /// <param name="data"></param>
+        private void VisibleTextBox_HEXString(string data)
+        {
+
+        }
+
+
+
+
+        #endregion
+
+        /// <summary>
+        /// Метод передачи обычной строки в COM-порт
+        /// </summary>
+        /// <param name="DataString"></param>
+        private void Transmit_string(string DataString)
+        {
+            try
+            {
+                
+                _serialCOM.WriteLine(String.Format("{0}", DataString));
+                TextCommand.Clear();
+                StringFormatData.Text += "Передача :" + DataString + Environment.NewLine;
+                VisibleTextBox_Strings(DataString);
+                VisibleTextBox_HEXString(DataString);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка :" + ex.Message);
+
+            }
+        }
+
+        /// <summary>
+        /// Метод передачи структуры в виде массива байтов через СОМ- терминал
+        /// </summary>
+        /// <param name="Data"></param>
+        private void Transmit_DataStruct(IHH_Formata_Data Data)
+        {
+            try
+            {
+                byte[] mass = convData.ConvertInMassByte(Data);//конвертируем структуру в массив байтов
+                _serialCOM.WriteLine(String.Format("{0}", mass));
+                TextCommand.Clear();
+                StringFormatData.Text += "Передача :" + String.Format("{0}", mass) + Environment.NewLine;
+                VisibleTextBox_Strings(String.Format("{0}", mass));
+                VisibleTextBox_HEXString(String.Format("{0}", mass));
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Ошибка :" + ex.Message);
+            }
+
+            
+           
         }
 
         /// <summary>
@@ -232,64 +488,196 @@ namespace Simple_Terminal
         {
             //вызываем функция разъединения
             Disconnect();
-            //производим закрытия окна
-            this.Close();
+           
+           
         }
 
         #region Команды отправки данных в COM
         private void Command_K1_Click(object sender, RoutedEventArgs e)
         {
+            StateCommand[0]++;
+            if(StateCommand[0]%2==0)
+            {
+                Command_K1.Background = new SolidColorBrush(Colors.Green);
+                Command_K1.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
 
+            }
+            else
+            {
+                Command_K1.Background = new SolidColorBrush(Colors.White);
+                Command_K1.Foreground = new SolidColorBrush(Colors.Black);
+            }
         }
 
         private void Command_K2_Click(object sender, RoutedEventArgs e)
         {
+            StateCommand[1]++;
+            if (StateCommand[1] % 2 == 0)
+            {
+                Command_K2.Background = new SolidColorBrush(Colors.Green);
+                Command_K2.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
 
+            }
+            else
+            {
+                Command_K2.Background = new SolidColorBrush(Colors.White);
+                Command_K2.Foreground = new SolidColorBrush(Colors.Black);
+            }
         }
 
         private void Command_K4_Click(object sender, RoutedEventArgs e)
         {
+            StateCommand[2]++;
+            if (StateCommand[2] % 2 == 0)
+            {
+                Command_K4.Background = new SolidColorBrush(Colors.Green);
+                Command_K4.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
 
+            }
+            else
+            {
+                Command_K4.Background = new SolidColorBrush(Colors.White);
+                Command_K4.Foreground = new SolidColorBrush(Colors.Black);
+            }
         }
 
         private void Command_Typr_Click(object sender, RoutedEventArgs e)
         {
+            StateCommand[3]++;
+            if (StateCommand[3] % 2 == 0)
+            {
+                Command_Typr.Background = new SolidColorBrush(Colors.Green);
+                Command_Typr.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
 
+            }
+            else
+            {
+                Command_Typr.Background = new SolidColorBrush(Colors.White);
+                Command_Typr.Foreground = new SolidColorBrush(Colors.Black);
+            }
         }
 
         private void Command_PK_Click(object sender, RoutedEventArgs e)
         {
+            StateCommand[4]++;
+            if (StateCommand[4] % 2 == 0)
+            {
+                Command_PK.Background = new SolidColorBrush(Colors.Green);
+                Command_PK.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
 
+            }
+            else
+            {
+                Command_PK.Background = new SolidColorBrush(Colors.White);
+                Command_PK.Foreground = new SolidColorBrush(Colors.Black);
+            }
         }
 
         private void Command_NP_Click(object sender, RoutedEventArgs e)
         {
+            StateCommand[5]++;
+            if (StateCommand[5] % 2 == 0)
+            {
+                Command_NP.Background = new SolidColorBrush(Colors.Green);
+                Command_NP.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
 
+            }
+            else
+            {
+                Command_NP.Background = new SolidColorBrush(Colors.White);
+                Command_NP.Foreground = new SolidColorBrush(Colors.Black);
+            }
         }
 
         private void Command_BPG_Click(object sender, RoutedEventArgs e)
         {
+            StateCommand[6]++;
+            if (StateCommand[6] % 2 == 0)
+            {
+                Command_BPG.Background = new SolidColorBrush(Colors.Green);
+                Command_BPG.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
 
+            }
+            else
+            {
+                Command_BPG.Background = new SolidColorBrush(Colors.White);
+                Command_BPG.Foreground = new SolidColorBrush(Colors.Black);
+            }
         }
 
         private void Command_OK_Click(object sender, RoutedEventArgs e)
         {
+            StateCommand[7]++;
+            if (StateCommand[7] % 2 == 0)
+            {
+                Command_OK.Background = new SolidColorBrush(Colors.Green);
+                Command_OK.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
 
+            }
+            else
+            {
+                Command_OK.Background = new SolidColorBrush(Colors.White);
+                Command_OK.Foreground = new SolidColorBrush(Colors.Black);
+            }
         }
 
         private void Command_PC_off_Click(object sender, RoutedEventArgs e)
         {
+            StateCommand[8]++;
+            if (StateCommand[8] % 2 == 0)
+            {
+                Command_PC_off.Background = new SolidColorBrush(Colors.Green);
+                Command_PC_off.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
 
+            }
+            else
+            {
+                Command_PC_off.Background = new SolidColorBrush(Colors.White);
+                Command_PC_off.Foreground = new SolidColorBrush(Colors.Black);
+            }
         }
 
         private void Command_KCY_Click(object sender, RoutedEventArgs e)
         {
+            StateCommand[9]++;
+            if (StateCommand[9] % 2 == 0)
+            {
+                Command_KCY.Background = new SolidColorBrush(Colors.Green);
+                Command_KCY.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
 
+            }
+            else
+            {
+                Command_KCY.Background = new SolidColorBrush(Colors.White);
+                Command_KCY.Foreground = new SolidColorBrush(Colors.Black);
+            }
         }
 
         private void Command_Fpol_Click(object sender, RoutedEventArgs e)
         {
+            StateCommand[10]++;
+            if (StateCommand[10] % 2 == 0)
+            {
+                Command_Fpol.Background = new SolidColorBrush(Colors.Green);
+                Command_Fpol.Foreground = new SolidColorBrush(Colors.White);
+                //отправляем данные в ком порт
 
+            }
+            else
+            {
+                Command_Fpol.Background = new SolidColorBrush(Colors.White);
+                Command_Fpol.Foreground = new SolidColorBrush(Colors.Black);
+            }
         }
 
         private void SendCommand_Click(object sender, RoutedEventArgs e)
@@ -298,5 +686,52 @@ namespace Simple_Terminal
         }
 
         #endregion
+
+        /// <summary>
+        /// Обработчик выбора режима работы терминала (выбран checkbox)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ckeck_SelectMode_Checked(object sender, RoutedEventArgs e)
+        {
+            TextCommand.IsReadOnly = false;
+            SendCommand.IsEnabled = true;
+            Command_K1.IsEnabled = false;
+            Command_K2.IsEnabled = false;
+            Command_K4.IsEnabled = false;
+            Command_Typr.IsEnabled = false;
+            Command_PK.IsEnabled = false;
+            Command_NP.IsEnabled = false;
+            Command_BPG.IsEnabled = false;
+            Command_OK.IsEnabled = false;
+            Command_PC_off.IsEnabled = false;
+            Command_KCY.IsEnabled = false;
+            Command_Fpol.IsEnabled = false;
+
+
+        }
+
+
+        /// <summary>
+        /// Обработчик выбора режима работы терминала (отжат checkbox)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ckeck_SelectMode_Unchecked(object sender, RoutedEventArgs e)
+        {
+            TextCommand.IsReadOnly = true;
+            SendCommand.IsEnabled = false;
+            Command_K1.IsEnabled = true;
+            Command_K2.IsEnabled = true;
+            Command_K4.IsEnabled = true;
+            Command_Typr.IsEnabled = true;
+            Command_PK.IsEnabled = true;
+            Command_NP.IsEnabled = true;
+            Command_BPG.IsEnabled = true;
+            Command_OK.IsEnabled = true;
+            Command_PC_off.IsEnabled = true;
+            Command_KCY.IsEnabled = true;
+            Command_Fpol.IsEnabled = true;
+        }
     }
 }
