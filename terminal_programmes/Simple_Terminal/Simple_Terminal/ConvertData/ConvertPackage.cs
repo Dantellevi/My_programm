@@ -36,7 +36,7 @@ namespace Simple_Terminal.ConvertData
         /// </summary>
         /// <param name="data">Принятый массив байт из виртуального COM порта</param>
         /// <returns>Полученная структура из принятых байт</returns>
-        public IHH_Formata_Data ConvertStructData(ref byte[] data)
+        public IHH_Formata_Data ConvertStructData( byte[] data)
         {
             var handle = GCHandle.Alloc(data, GCHandleType.Pinned);//дескриптор для объекта
             IHH_Formata_Data datastruct = Marshal.PtrToStructure<IHH_Formata_Data>(handle.AddrOfPinnedObject());//преобразует принятые байты в новый объект

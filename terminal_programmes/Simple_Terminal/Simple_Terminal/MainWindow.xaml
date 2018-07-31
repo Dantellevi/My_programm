@@ -36,7 +36,7 @@
                     <StackPanel Grid.Column="0" Orientation="Vertical">
                         <TextBlock Text="Имя порта:" Style="{StaticResource Texblocklabel}" />
                         <ComboBox x:Name="ComboPortName">
-                            
+
                         </ComboBox>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation="Vertical">
@@ -69,11 +69,11 @@
 
 
                 </Grid>
-                
+
             </Expander>
 
-           
-            
+
+
         </Grid>
         <TabControl Grid.Row="1" Background="#0911a0">
             <TabItem Header="Терминал">
@@ -82,20 +82,33 @@
                         <RowDefinition Height="9*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    
-                        <Grid Grid.Row="0">
+
+                    <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
+                            <ColumnDefinition Width="230*"/>
+                            <ColumnDefinition Width="102*"/>
+                            <ColumnDefinition Width="332*" />
+                            <ColumnDefinition Width="111*" />
+                            <ColumnDefinition Width="111*" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBox x:Name="StringFormatData" Grid.Column="0" IsReadOnly="True" Margin="1,1,1,1" Style="{StaticResource TextBoxTerminal}" ></TextBox>
-                        <TextBox x:Name="HextFormatData" Grid.Column="1" IsReadOnly="True" Margin="1,1,1,1" Style="{StaticResource TextBoxTerminal}" ></TextBox>
-                        <TextBox x:Name="BINFormatData" Grid.Column="2"  Margin="1,1,1,1" Style="{StaticResource TextBoxTerminal}" ></TextBox>
+                        <TextBox x:Name="StringFormatData" Grid.Column="0" IsReadOnly="True" Margin="1,1,1,1" Style="{StaticResource TextBoxTerminal}" Grid.ColumnSpan="2" ></TextBox>
+                        <TextBox x:Name="HextFormatData" Grid.Column="2" IsReadOnly="True" Margin="1,1,1,1" Style="{StaticResource TextBoxTerminal}" ></TextBox>
+                        <StackPanel Orientation="Vertical" Grid.Column="3" Height="482" VerticalAlignment="Top">
+                            <TextBox x:Name="f1_textEdit" Margin="10,20,10,10" />
+                            <Slider x:Name="f1_slider" Minimum="-12" Maximum="12" Orientation="Vertical" Margin="10,60,10,34" Height="367" />
+
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="4" Height="482" VerticalAlignment="Top">
+                            <TextBox x:Name="f2_textEdit" Margin="10,20,10,10" />
+                            <Slider x:Name="f2_slider" Minimum="-12" Maximum="12" Orientation="Vertical" Margin="10,60,10,34" Height="367" />
+
+                        </StackPanel>
+
                     </Grid>
-                        
-                    
+
+
                     <StackPanel Orientation="Horizontal" Grid.Row="1" >
                         <Button x:Name="Command_K1" Click="Command_K1_Click" Content="K1" Width="50" />
                         <Button x:Name="Command_K2" Click="Command_K2_Click" Content="K2" Width="50" />
@@ -112,15 +125,15 @@
                             <CheckBox x:Name="ckeck_SelectMode" Checked="ckeck_SelectMode_Checked" Foreground="White" Content="Обычный терминал" Unchecked="ckeck_SelectMode_Unchecked" />
                             <TextBox x:Name="TextCommand" IsReadOnly="True" Margin="10,10,1,5" Width="200" />
                         </StackPanel>
-                        
+
                         <Button x:Name="SendCommand" IsEnabled="False" Click="SendCommand_Click" Margin="5,25,5,5" Content=">" Width="100" />
-                        
+
                     </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="Графики">построение графиков!!!!!</TabItem>
             <TabItem Header="Диагностика сигналов">Поля со значениями с АЦП и ЦАП</TabItem>
-            
+
         </TabControl>
 
 
@@ -137,9 +150,9 @@
                 <Label Content="Время работы:" Style="{StaticResource TextblockStatusBar}" />
                 <TextBlock x:Name="Timer_Work" Text="нуль" Height="17" Style="{StaticResource StatusBarData}"></TextBlock>
             </StackPanel>
-           
+
         </StatusBar>
-        
+
     </Grid>
 
 </Window>

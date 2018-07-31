@@ -31,8 +31,9 @@ namespace Simple_Terminal
         private List<string> ListStopBit;//список для выбора стоп битов
         private int clicker=1;// переменная для хранения кол-ва нажатий
         private int[] StateCommand = new int[11];//состояние команд управлением платой     
-        private delegate void ReadStructData(byte[] DataCOM);//делегат для работы на прием данных
-
+        private delegate void ReadStructData(byte[] DataCOM,bool flag);//делегат для работы на прием данных прием структуры в виде массива данных
+        private delegate void ReadStringCOM(string DataCOM);//делегат для работы на прием данных прием структуры в виде строки
+        IHH_Formata_Data dataFormat = new IHH_Formata_Data();//создание экземпляра  структуры
 
         private SerialPort _serialCOM=new SerialPort();//экземпляр СОМ терминала
         ConvertPackage convData = new ConvertPackage();// экземпляр класса для конвертации структуры в массив и наоборот
@@ -40,8 +41,6 @@ namespace Simple_Terminal
         public MainWindow()
         {
             InitializeComponent();
-            
-            IHH_Formata_Data dataFormat = new IHH_Formata_Data();//создание экземпляра  структуры
             dataFormat.Initilice_Massive();// создание экземпляров массивов
             SetList_Data();//Установка данных в комбобоксы
             InitStateButton();//инициализация состояний нажатий кнопок команд
@@ -374,17 +373,53 @@ namespace Simple_Terminal
         /// <param name="e"></param>
         private void _serialCOM_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            
+            if (ckeck_SelectMode.IsChecked == true)//работает как обычный терминал
+            {
+                Thread.Sleep(50);
+                string data = _serialCOM.ReadLine();
+                //запускаем в отдельном потоке.....
+                /*
+                 * 
+                 * 
+                 * */
+
+            }
+            else if (ckeck_SelectMode.IsChecked == false)    //работает как спец. терминал
+            {
+                byte[] buffer = new byte[256];
+                int readBytes = _serialCOM.Read(buffer, 0, buffer.Length);
+                dataFormat = convData.ConvertStructData(buffer);
+                Receive_Data_struct(dataFormat);
+                /*запускаем в отдельном потоке.....
+                 * VisibleTextBox_Datastruct(dataFormat, false);
+                VisibleTextBox_HEXDatastruct(dataFormat, false);
+                 * 
+                 * */
+
+            }
         }
         
+
         /// <summary>
-        /// Разнесение данных по полям окна по принятой стрктуре
+        /// Разнесение данных по полям окна(диагностика сигналов) по принятой стрктуре
         /// </summary>
         /// <param name="Data"></param>
         private void Receive_Data_struct(IHH_Formata_Data Data)
         {
+           
+        }
+
+
+
+        /// <summary>
+        /// Метод обновления данных по переданной структуре
+        /// </summary>
+        /// <param name="data"></param>
+        private void Update_Transmit_Data_struct(IHH_Formata_Data data)
+        {
 
         }
+
 
 
         #region Методы отображения принятых и отправленых данных в полях
@@ -393,18 +428,39 @@ namespace Simple_Terminal
         /// Метод отображения в поле текстбокса  данных отправляемых/принимаемых со структуры
         /// </summary>
         /// <param name="data"></param>
-        private void VisibleTextBox_Datastruct(IHH_Formata_Data data)
+        private void VisibleTextBox_Datastruct(IHH_Formata_Data data,bool Res_Tran)
         {
+            if(Res_Tran)//Передача данных
+            {
+                string TimeTransmit = DateTime.Now.ToString();
+                StringFormatData.Text += string.Format("Время передачи:{0}" + Environment.NewLine + "{1}||{2}||{3}||{4}||{5}"+Environment.NewLine, TimeTransmit, data.ADC_massive, data.DAC_massive, data.Digital_input, data.Digital_Output, data.ZeroByte);
 
+            }
+            else  //прием данных
+            {
+                string TimeTransmit = DateTime.Now.ToString();
+                StringFormatData.Text += string.Format("Время Приема:{0}" + Environment.NewLine + "{1}||{2}||{3}||{4}||{5}" + Environment.NewLine, TimeTransmit, data.ADC_massive, data.DAC_massive, data.Digital_input, data.Digital_Output, data.ZeroByte);
+            }
         }
+
 
         /// <summary>
         /// Метод отображения в поле текстбокса  данных в виде HEX отправляемых/принимаемых со структуры
         /// </summary>
         /// <param name="data"></param>
-        private void VisibleTextBox_HEXDatastruct(IHH_Formata_Data data)
+        private void VisibleTextBox_HEXDatastruct(IHH_Formata_Data data, bool Res_Tran)
         {
+            if (Res_Tran)//Передача данных
+            {
+                string TimeTransmit = DateTime.Now.ToString();
+                HextFormatData.Text += string.Format("Время передачи:{0}" + Environment.NewLine + " 0x{1:X} ||0x{2:X}||0x{3:X}||0x{4:X}||0x{5:X}" + Environment.NewLine, TimeTransmit, data.ADC_massive, data.DAC_massive, data.Digital_input, data.Digital_Output, data.ZeroByte);
 
+            }
+            else  //прием данных
+            {
+                string TimeTransmit = DateTime.Now.ToString();
+                HextFormatData.Text += string.Format("Время Приема:{0}" + Environment.NewLine + "0x{1:X}||0x{2:X}||0x{3:X}||0x{4:X}||0x{5:X}" + Environment.NewLine, TimeTransmit, data.ADC_massive, data.DAC_massive, data.Digital_input, data.Digital_Output, data.ZeroByte);
+            }
         }
 
         /// <summary>
@@ -466,8 +522,8 @@ namespace Simple_Terminal
                 _serialCOM.WriteLine(String.Format("{0}", mass));
                 TextCommand.Clear();
                 StringFormatData.Text += "Передача :" + String.Format("{0}", mass) + Environment.NewLine;
-                VisibleTextBox_Strings(String.Format("{0}", mass));
-                VisibleTextBox_HEXString(String.Format("{0}", mass));
+                VisibleTextBox_Datastruct(Data,true);
+                VisibleTextBox_HEXDatastruct(Data,true);
 
             }
             catch(Exception ex)
