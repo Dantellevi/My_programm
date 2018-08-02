@@ -31,8 +31,8 @@ namespace Simple_Terminal
         private List<string> ListStopBit;//список для выбора стоп битов
         private int clicker=1;// переменная для хранения кол-ва нажатий
         private int[] StateCommand = new int[11];//состояние команд управлением платой     
-        private delegate void ReadStructData(byte[] DataCOM,bool flag);//делегат для работы на прием данных прием структуры в виде массива данных
-        private delegate void ReadStringCOM(string DataCOM);//делегат для работы на прием данных прием структуры в виде строки
+        private delegate void ReadStructDataCOM(IHH_Formata_Data DataCOM,bool flag);//делегат для работы на прием данных прием структуры
+        private delegate void ReadStringCOM(string DataCOM,bool val);//делегат для работы на прием данных прием структуры в виде строки
         IHH_Formata_Data dataFormat = new IHH_Formata_Data();//создание экземпляра  структуры
 
         private SerialPort _serialCOM=new SerialPort();//экземпляр СОМ терминала
@@ -377,11 +377,8 @@ namespace Simple_Terminal
             {
                 Thread.Sleep(50);
                 string data = _serialCOM.ReadLine();
-                //запускаем в отдельном потоке.....
-                /*
-                 * 
-                 * 
-                 * */
+                Dispatcher.BeginInvoke(new ReadStringCOM(VisibleTextBox_Strings), new object[] { data,false });
+               
 
             }
             else if (ckeck_SelectMode.IsChecked == false)    //работает как спец. терминал
@@ -390,16 +387,12 @@ namespace Simple_Terminal
                 int readBytes = _serialCOM.Read(buffer, 0, buffer.Length);
                 dataFormat = convData.ConvertStructData(buffer);
                 Receive_Data_struct(dataFormat);
-                /*запускаем в отдельном потоке.....
-                 * VisibleTextBox_Datastruct(dataFormat, false);
-                VisibleTextBox_HEXDatastruct(dataFormat, false);
-                 * 
-                 * */
-
+                Dispatcher.BeginInvoke(new ReadStructDataCOM(VisibleTextBox_Datastruct), new object[] { dataFormat, false });
+                Dispatcher.BeginInvoke(new ReadStructDataCOM(VisibleTextBox_HEXDatastruct), new object[] { dataFormat, false });
+                
             }
         }
         
-
         /// <summary>
         /// Разнесение данных по полям окна(диагностика сигналов) по принятой стрктуре
         /// </summary>
@@ -433,13 +426,13 @@ namespace Simple_Terminal
             if(Res_Tran)//Передача данных
             {
                 string TimeTransmit = DateTime.Now.ToString();
-                StringFormatData.Text += string.Format("Время передачи:{0}" + Environment.NewLine + "{1}||{2}||{3}||{4}||{5}"+Environment.NewLine, TimeTransmit, data.ADC_massive, data.DAC_massive, data.Digital_input, data.Digital_Output, data.ZeroByte);
+                StringFormatData.Text += string.Format("Время передачи:{0}" + "{1}||{2}||{3}||{4}||{5}"+Environment.NewLine, TimeTransmit, data.ADC_massive, data.DAC_massive, data.Digital_input, data.Digital_Output, data.ZeroByte);
 
             }
             else  //прием данных
             {
                 string TimeTransmit = DateTime.Now.ToString();
-                StringFormatData.Text += string.Format("Время Приема:{0}" + Environment.NewLine + "{1}||{2}||{3}||{4}||{5}" + Environment.NewLine, TimeTransmit, data.ADC_massive, data.DAC_massive, data.Digital_input, data.Digital_Output, data.ZeroByte);
+                StringFormatData.Text += string.Format("Время Приема:{0}" + "{1}||{2}||{3}||{4}||{5}" + Environment.NewLine, TimeTransmit, data.ADC_massive, data.DAC_massive, data.Digital_input, data.Digital_Output, data.ZeroByte);
             }
         }
 
@@ -464,23 +457,28 @@ namespace Simple_Terminal
         }
 
         /// <summary>
-        /// Метод отображения в поле текстбокса  данных отправляемых/принимаемых ввид строки
+        /// Метод отображения в поле текстбокса  данных отправляемых/принимаемых ввид строки и HEX
         /// </summary>
         /// <param name="data"></param>
-        private void VisibleTextBox_Strings(string data)
+        private void VisibleTextBox_Strings(string data,bool flagoperation)
         {
+            string DataTime = DateTime.Now.ToString();
+            if(flagoperation)
+            {
+                StringFormatData.Text += string.Format("[{0}]->:" + "{1}" + Environment.NewLine, DataTime, data);
+                HextFormatData.Text += string.Format("[{0}]->:" + Environment.NewLine + "0x{1:X}" + Environment.NewLine, DataTime, data);
+            }
+            else
+            {
+                StringFormatData.Text += string.Format("[{0}]<-:" + "{1}" + Environment.NewLine, DataTime, data);
+                HextFormatData.Text += string.Format("[{0}]<-:" + Environment.NewLine + "0x{1:X}" + Environment.NewLine, DataTime, data);
+            }
 
+            
         }
         
 
-        /// <summary>
-        /// Метод отображения в поле текстбокса  данных в виде HEX отправляемых/принимаемых ввиде строки
-        /// </summary>
-        /// <param name="data"></param>
-        private void VisibleTextBox_HEXString(string data)
-        {
-
-        }
+        
 
 
 
@@ -499,8 +497,8 @@ namespace Simple_Terminal
                 _serialCOM.WriteLine(String.Format("{0}", DataString));
                 TextCommand.Clear();
                 StringFormatData.Text += "Передача :" + DataString + Environment.NewLine;
-                VisibleTextBox_Strings(DataString);
-                VisibleTextBox_HEXString(DataString);
+                VisibleTextBox_Strings(DataString,true);
+                //VisibleTextBox_HEXString(DataString);
 
             }
             catch (Exception ex)
@@ -557,12 +555,15 @@ namespace Simple_Terminal
                 Command_K1.Background = new SolidColorBrush(Colors.Green);
                 Command_K1.Foreground = new SolidColorBrush(Colors.White);
                 //отправляем данные в ком порт
-
+                dataFormat.ADC_massive[0] = 1;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
             else
             {
                 Command_K1.Background = new SolidColorBrush(Colors.White);
                 Command_K1.Foreground = new SolidColorBrush(Colors.Black);
+                dataFormat.ADC_massive[0] = 0;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
         }
 
@@ -574,12 +575,15 @@ namespace Simple_Terminal
                 Command_K2.Background = new SolidColorBrush(Colors.Green);
                 Command_K2.Foreground = new SolidColorBrush(Colors.White);
                 //отправляем данные в ком порт
-
+                dataFormat.ADC_massive[1] = 1;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
             else
             {
                 Command_K2.Background = new SolidColorBrush(Colors.White);
                 Command_K2.Foreground = new SolidColorBrush(Colors.Black);
+                dataFormat.ADC_massive[1] = 0;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
         }
 
@@ -591,12 +595,15 @@ namespace Simple_Terminal
                 Command_K4.Background = new SolidColorBrush(Colors.Green);
                 Command_K4.Foreground = new SolidColorBrush(Colors.White);
                 //отправляем данные в ком порт
-
+                dataFormat.ADC_massive[2] = 1;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
             else
             {
                 Command_K4.Background = new SolidColorBrush(Colors.White);
                 Command_K4.Foreground = new SolidColorBrush(Colors.Black);
+                dataFormat.ADC_massive[2] = 0;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
         }
 
@@ -608,12 +615,15 @@ namespace Simple_Terminal
                 Command_Typr.Background = new SolidColorBrush(Colors.Green);
                 Command_Typr.Foreground = new SolidColorBrush(Colors.White);
                 //отправляем данные в ком порт
-
+                dataFormat.ADC_massive[3] = 1;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
             else
             {
                 Command_Typr.Background = new SolidColorBrush(Colors.White);
                 Command_Typr.Foreground = new SolidColorBrush(Colors.Black);
+                dataFormat.ADC_massive[3] = 0;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
         }
 
@@ -625,12 +635,15 @@ namespace Simple_Terminal
                 Command_PK.Background = new SolidColorBrush(Colors.Green);
                 Command_PK.Foreground = new SolidColorBrush(Colors.White);
                 //отправляем данные в ком порт
-
+                dataFormat.ADC_massive[4] = 1;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
             else
             {
                 Command_PK.Background = new SolidColorBrush(Colors.White);
                 Command_PK.Foreground = new SolidColorBrush(Colors.Black);
+                dataFormat.ADC_massive[4] = 0;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
         }
 
@@ -642,12 +655,15 @@ namespace Simple_Terminal
                 Command_NP.Background = new SolidColorBrush(Colors.Green);
                 Command_NP.Foreground = new SolidColorBrush(Colors.White);
                 //отправляем данные в ком порт
-
+                dataFormat.ADC_massive[5] = 1;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
             else
             {
                 Command_NP.Background = new SolidColorBrush(Colors.White);
                 Command_NP.Foreground = new SolidColorBrush(Colors.Black);
+                dataFormat.ADC_massive[5] = 0;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
         }
 
@@ -659,12 +675,15 @@ namespace Simple_Terminal
                 Command_BPG.Background = new SolidColorBrush(Colors.Green);
                 Command_BPG.Foreground = new SolidColorBrush(Colors.White);
                 //отправляем данные в ком порт
-
+                dataFormat.ADC_massive[6] = 1;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
             else
             {
                 Command_BPG.Background = new SolidColorBrush(Colors.White);
                 Command_BPG.Foreground = new SolidColorBrush(Colors.Black);
+                dataFormat.ADC_massive[6] = 0;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
         }
 
@@ -676,12 +695,15 @@ namespace Simple_Terminal
                 Command_OK.Background = new SolidColorBrush(Colors.Green);
                 Command_OK.Foreground = new SolidColorBrush(Colors.White);
                 //отправляем данные в ком порт
-
+                dataFormat.ADC_massive[7] = 1;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
             else
             {
                 Command_OK.Background = new SolidColorBrush(Colors.White);
                 Command_OK.Foreground = new SolidColorBrush(Colors.Black);
+                dataFormat.ADC_massive[7] = 0;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
         }
 
@@ -693,12 +715,15 @@ namespace Simple_Terminal
                 Command_PC_off.Background = new SolidColorBrush(Colors.Green);
                 Command_PC_off.Foreground = new SolidColorBrush(Colors.White);
                 //отправляем данные в ком порт
-
+                dataFormat.ADC_massive[8] = 1;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
             else
             {
                 Command_PC_off.Background = new SolidColorBrush(Colors.White);
                 Command_PC_off.Foreground = new SolidColorBrush(Colors.Black);
+                dataFormat.ADC_massive[8] = 0;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
         }
 
@@ -710,12 +735,15 @@ namespace Simple_Terminal
                 Command_KCY.Background = new SolidColorBrush(Colors.Green);
                 Command_KCY.Foreground = new SolidColorBrush(Colors.White);
                 //отправляем данные в ком порт
-
+                dataFormat.ADC_massive[9] = 1;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
             else
             {
                 Command_KCY.Background = new SolidColorBrush(Colors.White);
                 Command_KCY.Foreground = new SolidColorBrush(Colors.Black);
+                dataFormat.ADC_massive[9] = 0;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
         }
 
@@ -727,18 +755,21 @@ namespace Simple_Terminal
                 Command_Fpol.Background = new SolidColorBrush(Colors.Green);
                 Command_Fpol.Foreground = new SolidColorBrush(Colors.White);
                 //отправляем данные в ком порт
-
+                dataFormat.ADC_massive[10] = 1;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
             else
             {
                 Command_Fpol.Background = new SolidColorBrush(Colors.White);
                 Command_Fpol.Foreground = new SolidColorBrush(Colors.Black);
+                dataFormat.ADC_massive[10] = 0;//один условно, мы меняем данные первого элемента отвечающие за определенную команду
+                Transmit_DataStruct(dataFormat);
             }
         }
 
         private void SendCommand_Click(object sender, RoutedEventArgs e)
         {
-
+            Transmit_string(TextCommand.Text);
         }
 
         #endregion
