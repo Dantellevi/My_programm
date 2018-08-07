@@ -44,24 +44,7 @@ namespace Simple_Terminal.ConvertData
             return datastruct;
 
         }
-
-
-        /// <summary>
-        /// Метод старта логирования системы
-        /// </summary>
-        void Start_Logging()
-        {
-            //создаем текстовый файл с именем:дата_время.txt
-            string Namefile = string.Format("{0}.txt", DateTime.Now);
-            //задать относительный путь
-            string path = System.IO.Path.GetFullPath(@"LoggingData\")+Namefile;
-            using (FileStream fs=File.Create(path))
-            {
-
-            } 
-           
-                
-        }
+        
 
         /// <summary>
         /// Логирование данных запись/перезапись в текстовый файл
@@ -69,32 +52,53 @@ namespace Simple_Terminal.ConvertData
         /// <param name="data">Принимаемые/отправляемые данные</param>
         /// <param name="flagSR">Флаг отвечающий за  отправку/прием байт</param>
         /// <param name="flagMode">Флаг отвечающий за режим работы (работает со структурой , либо работаем с текстовыми данными)</param>
-        public void LogSystem(byte[] data,bool flagSR,bool flagMode)
+        public void LogSystem(byte[] data,bool flagSR,bool flagMode,FileStream fs)
         {
-            if(flagMode)//структуры данных 
+            //создаем текстовый файл с именем:дата_время.txt
+            string Namefile = string.Format("{0}.txt", DateTime.Now);
+            //задать относительный путь
+            string path = System.IO.Path.GetFullPath(@"LoggingData\") + Namefile;
+            using (fs = File.Create(path))
             {
-                if (flagSR)  //принимаем массив байт(Пример в логе: 12.01.2018 12:15-Принятые байты из COM порта:\n.......байты\n)
+                if (flagMode)//структуры данных 
                 {
+                    if (flagSR)  //принимаем массив байт(Пример в логе: 12.01.2018 12:15-Принятые байты из COM порта:\n.......байты\n)
+                    {
+                        IHH_Formata_Data st = ConvertStructData(data);
+                        string logData = string.Format("{Принятые Структура данных[{0}]:{1}\t{2}\t{3}\t{4}\t{5}\t\n}", DateTime.Now,st.ADC_massive,st.DAC_massive,st.Digital_input,st.Digital_Output,st.ZeroByte);
+                        byte[] Data = new UTF8Encoding(true).GetBytes(logData);
+                        fs.Write(Data, 0, Data.Length);
 
-
+                    }
+                    else //отправляем массив байт(13.03.2018 12:20 - Отправленные байты в COM-порт:\n..............байты\n)
+                    {
+                        IHH_Formata_Data st = ConvertStructData(data);
+                        string logData = string.Format("{Отправленная Структура данных[{0}]:{1}\t{2}\t{3}\t{4}\t{5}\t\n}", DateTime.Now, st.ADC_massive, st.DAC_massive, st.Digital_input, st.Digital_Output, st.ZeroByte);
+                        byte[] Data = new UTF8Encoding(true).GetBytes(logData);
+                        fs.Write(Data, 0, Data.Length);
+                    }
                 }
-                else //отправляем массив байт(13.03.2018 12:20 - Отправленные байты в COM-порт:\n..............байты\n)
+                else// обычные строки команд
                 {
+                    if (flagSR)  //принимаем массив байт(Пример в логе: 12.01.2018 12:15-Принятые байты из COM порта:\n.......байты\n)
+                    {
+                        string logData = string.Format("{Принятые данные[{0}]:0x{1:X}\n}", DateTime.Now, data);
+                        byte[] Data = new UTF8Encoding(true).GetBytes(logData);
+                        fs.Write(Data, 0, Data.Length);
 
+                    }
+                    else //отправляем массив байт(13.03.2018 12:20 - Отправленные байты в COM-порт:\n..............байты\n)
+                    {
+                        
+                        string logData = string.Format("{Отправленные данные[{0}]:0x{1:X}\n}", DateTime.Now, data);
+                        byte[] Data = new UTF8Encoding(true).GetBytes(logData);
+                        fs.Write(Data, 0, Data.Length);
+
+
+                    }
                 }
             }
-            else// обычные строки команд
-            {
-                if (flagSR)  //принимаем массив байт(Пример в логе: 12.01.2018 12:15-Принятые байты из COM порта:\n.......байты\n)
-                {
-
-
-                }
-                else //отправляем массив байт(13.03.2018 12:20 - Отправленные байты в COM-порт:\n..............байты\n)
-                {
-
-                }
-            }
+                
             
         }
 

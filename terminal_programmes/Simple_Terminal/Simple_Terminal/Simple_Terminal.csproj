@@ -35,6 +35,166 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MindFusion.Barcodes, Version=1.0.2.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.2017.2.0\lib\net45\MindFusion.Barcodes.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Barcodes.WinForms, Version=1.0.2.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.2017.2.0\lib\net45\MindFusion.Barcodes.WinForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Barcodes.Wpf, Version=1.0.1.401, Culture=neutral, PublicKeyToken=b7ce17acfa532ee8, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.Wpf.2017.1.0\lib\net40\MindFusion.Barcodes.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Charting, Version=4.1.0.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.2017.2.0\lib\net45\MindFusion.Charting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Charting.WinForms, Version=4.1.0.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.2017.2.0\lib\net45\MindFusion.Charting.WinForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Charting.Wpf, Version=2.2.0.40, Culture=neutral, PublicKeyToken=305cd0896f327431, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.Wpf.2017.1.0\lib\net40\MindFusion.Charting.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Common, Version=1.3.2.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Diagramming.6.5.2\lib\net45\MindFusion.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Common.WinForms, Version=1.0.2.451, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Diagramming.6.5.2\lib\net45\MindFusion.Common.WinForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Common.Wpf, Version=1.0.1.402, Culture=neutral, PublicKeyToken=7c295219c91bf330, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Spreadsheet.Wpf.1.2.0\lib\net40\MindFusion.Common.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.DataBinding, Version=2.5.1.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.2017.2.0\lib\net45\MindFusion.DataBinding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.DataViews.Wpf, Version=1.0.3.10078, Culture=neutral, PublicKeyToken=eee18b55b010b70d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.Wpf.2017.1.0\lib\net40\MindFusion.DataViews.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Diagramming, Version=6.5.2.451, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Diagramming.6.5.2\lib\net45\MindFusion.Diagramming.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Diagramming.WinForms, Version=6.5.2.451, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Diagramming.6.5.2\lib\net45\MindFusion.Diagramming.WinForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Diagramming.WinForms.Controls, Version=6.5.1.451, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.2017.2.0\lib\net45\MindFusion.Diagramming.WinForms.Controls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Diagramming.Wpf, Version=3.5.0.400, Culture=neutral, PublicKeyToken=1080b51628c81789, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.Wpf.2017.1.0\lib\net40\MindFusion.Diagramming.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Diagramming.Wpf.DataBinding, Version=3.5.0.400, Culture=neutral, PublicKeyToken=1080b51628c81789, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.Wpf.2017.1.0\lib\net40\MindFusion.Diagramming.Wpf.DataBinding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Gauges, Version=1.0.1.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.2017.2.0\lib\net45\MindFusion.Gauges.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Gauges.WinForms, Version=1.0.1.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.2017.2.0\lib\net45\MindFusion.Gauges.WinForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Gauges.Wpf, Version=1.0.2.40, Culture=neutral, PublicKeyToken=9847dae5d86d764b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.Wpf.2017.1.0\lib\net40\MindFusion.Gauges.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Graphs, Version=2.3.1.35487, Culture=neutral, PublicKeyToken=0d09f0b4914ade28, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.Wpf.2017.1.0\lib\net40\MindFusion.Graphs.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Keyboard.WinForms, Version=4.4.2.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.2017.2.0\lib\net45\MindFusion.Keyboard.WinForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Keyboard.Wpf, Version=4.4.2.401, Culture=neutral, PublicKeyToken=d98d91de81eac177, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Keyboard.Wpf.4.4.2.1\lib\net40\MindFusion.Keyboard.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Licensing, Version=1.0.3.25443, Culture=neutral, PublicKeyToken=9d02e21d957ddaef, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Spreadsheet.Wpf.1.2.0\lib\net40\MindFusion.Licensing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Mapping, Version=2.0.1.401, Culture=neutral, PublicKeyToken=1488c0f33588d9f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.Wpf.2017.1.0\lib\net40\MindFusion.Mapping.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Mapping.WinForms, Version=2.0.2.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.2017.2.0\lib\net45\MindFusion.Mapping.WinForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Mapping.Wpf, Version=2.0.1.401, Culture=neutral, PublicKeyToken=1488c0f33588d9f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.Wpf.2017.1.0\lib\net40\MindFusion.Mapping.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.RealTimeCharting.Wpf, Version=2.2.0.40, Culture=neutral, PublicKeyToken=305cd0896f327431, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.Wpf.2017.1.0\lib\net40\MindFusion.RealTimeCharting.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Reporting, Version=2.5.1.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.2017.2.0\lib\net45\MindFusion.Reporting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Reporting.WinForms, Version=2.5.1.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.2017.2.0\lib\net45\MindFusion.Reporting.WinForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Reporting.Wpf, Version=1.4.0.10064, Culture=neutral, PublicKeyToken=eacb9e23536aabb2, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.Wpf.2017.1.0\lib\net40\MindFusion.Reporting.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Scheduling, Version=5.7.1.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.2017.2.0\lib\net45\MindFusion.Scheduling.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Scheduling.Wpf, Version=3.5.0.10078, Culture=neutral, PublicKeyToken=d12631580350466b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.Wpf.2017.1.0\lib\net40\MindFusion.Scheduling.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Spreadsheet.WinForms, Version=1.7.1.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.2017.2.0\lib\net45\MindFusion.Spreadsheet.WinForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Spreadsheet.WinForms.StandardForms, Version=1.7.1.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.2017.2.0\lib\net45\MindFusion.Spreadsheet.WinForms.StandardForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Spreadsheet.Wpf, Version=1.2.0.40, Culture=neutral, PublicKeyToken=76915eeae1e7c41d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Spreadsheet.Wpf.1.2.0\lib\net40\MindFusion.Spreadsheet.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Svg, Version=1.2.2.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.2017.2.0\lib\net45\MindFusion.Svg.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Themes.Wpf, Version=1.1.2.40, Culture=neutral, PublicKeyToken=f8dd9d4723a288e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Keyboard.Wpf.4.4.2.1\lib\net40\MindFusion.Themes.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.UI.WinForms, Version=1.2.0.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.2017.2.0\lib\net45\MindFusion.UI.WinForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.UI.Wpf, Version=1.0.0.10055, Culture=neutral, PublicKeyToken=2e742e0ce9634ec0, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.Wpf.2017.1.0\lib\net40\MindFusion.UI.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MindFusion.Vsx, Version=1.0.3.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL">
+      <HintPath>..\packages\MindFusion.Pack.2017.2.0\lib\net45\MindFusion.Vsx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.5.7\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>

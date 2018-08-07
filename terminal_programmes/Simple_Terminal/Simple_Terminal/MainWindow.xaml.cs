@@ -17,6 +17,10 @@ using System.Threading;
 using System.IO.Ports;
 using Simple_Terminal.ConvertData;
 
+using MindFusion.Charting.Wpf;
+using MindFusion.RealTimeCharting.Wpf;
+using MindFusion.Diagramming.Wpf;
+
 namespace Simple_Terminal
 {
     /// <summary>
