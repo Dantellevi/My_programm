@@ -16,10 +16,13 @@ using System.IO;
 using System.Threading;
 using System.IO.Ports;
 using Simple_Terminal.ConvertData;
-
 using MindFusion.Charting.Wpf;
 using MindFusion.RealTimeCharting.Wpf;
 using MindFusion.Diagramming.Wpf;
+using LiveCharts;
+using LiveCharts.Wpf;
+
+
 
 namespace Simple_Terminal
 {
@@ -50,6 +53,8 @@ namespace Simple_Terminal
             InitStateButton();//инициализация состояний нажатий кнопок команд
         }
 
+
+       
 
         /// <summary>
         /// Метод инициализации состояний кнопок
