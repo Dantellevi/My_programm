@@ -13,6 +13,11 @@ namespace Simple_Terminal.ConvertData
     /// </summary>
    public class ConvertPackage
     {
+
+      private  string path;
+        FileStream fs;
+
+
         /// <summary>
         /// Метод конвертации структуры в массив байт
         /// </summary>
@@ -52,7 +57,7 @@ namespace Simple_Terminal.ConvertData
         /// <param name="data">Принимаемые/отправляемые данные</param>
         /// <param name="flagSR">Флаг отвечающий за  отправку/прием байт</param>
         /// <param name="flagMode">Флаг отвечающий за режим работы (работает со структурой , либо работаем с текстовыми данными)</param>
-        public void LogSystem(byte[] data,bool flagSR,bool flagMode,FileStream fs)
+        public void LogSystem(byte[] data,bool flagSR,bool flagMode)
         {
             //создаем текстовый файл с именем:дата_время.txt
             string Namefile = string.Format("{0}.txt", DateTime.Now);

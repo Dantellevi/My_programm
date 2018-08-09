@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:grap="http://mindfusion.eu/charting/wpf"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+       
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Simple_Terminal"
@@ -142,26 +143,7 @@
                         <RowDefinition  Height="2*"/>
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <lvc:CartesianChart x:Name="FON_1" Grid.Row="0" Background="White" Margin="3,3,3,3">
-                        <lvc:CartesianChart.AxisX>
-                            
-                        </lvc:CartesianChart.AxisX>
-                    </lvc:CartesianChart>
-                    <lvc:CartesianChart x:Name="FON_2" Grid.Row="1" Background="White" Margin="3,3,3,3">
-                        <lvc:CartesianChart.AxisX>
-
-                        </lvc:CartesianChart.AxisX>
-                    </lvc:CartesianChart>
-                    <lvc:CartesianChart x:Name="delta_WU" Grid.Row="2" Background="White" Margin="3,3,3,3">
-                        <lvc:CartesianChart.AxisX>
-
-                        </lvc:CartesianChart.AxisX>
-                    </lvc:CartesianChart>
-                    <lvc:CartesianChart x:Name="ZG" Grid.Row="3" Background="White" Margin="3,3,3,3">
-                        <lvc:CartesianChart.AxisX>
-
-                        </lvc:CartesianChart.AxisX>
-                    </lvc:CartesianChart>
+                    
                     <Button x:Name="ButOther_plot" Content="Другие графики" Grid.Row="4" Margin="5,5,5,5" />
                 </Grid>
                 

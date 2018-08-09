@@ -41,16 +41,18 @@ namespace Simple_Terminal
         private delegate void ReadStructDataCOM(IHH_Formata_Data DataCOM,bool flag);//делегат для работы на прием данных прием структуры
         private delegate void ReadStringCOM(string DataCOM,bool val);//делегат для работы на прием данных прием структуры в виде строки
         IHH_Formata_Data dataFormat = new IHH_Formata_Data();//создание экземпляра  структуры
-
+        
         private SerialPort _serialCOM=new SerialPort();//экземпляр СОМ терминала
         ConvertPackage convData = new ConvertPackage();// экземпляр класса для конвертации структуры в массив и наоборот
-
+       
+        
         public MainWindow()
         {
             InitializeComponent();
             dataFormat.Initilice_Massive();// создание экземпляров массивов
             SetList_Data();//Установка данных в комбобоксы
             InitStateButton();//инициализация состояний нажатий кнопок команд
+            
         }
 
 
@@ -387,7 +389,7 @@ namespace Simple_Terminal
                 Thread.Sleep(50);
                 string data = _serialCOM.ReadLine();
                 Dispatcher.BeginInvoke(new ReadStringCOM(VisibleTextBox_Strings), new object[] { data,false });
-               
+                convData.LogSystem(Encoding.UTF8.GetBytes(data),false,false);
 
             }
             else if (ckeck_SelectMode.IsChecked == false)    //работает как спец. терминал
@@ -398,7 +400,7 @@ namespace Simple_Terminal
                 Receive_Data_struct(dataFormat);
                 Dispatcher.BeginInvoke(new ReadStructDataCOM(VisibleTextBox_Datastruct), new object[] { dataFormat, false });
                 Dispatcher.BeginInvoke(new ReadStructDataCOM(VisibleTextBox_HEXDatastruct), new object[] { dataFormat, false });
-                
+                convData.LogSystem(buffer, false, true);
             }
         }
         
@@ -507,6 +509,7 @@ namespace Simple_Terminal
                 TextCommand.Clear();
                 StringFormatData.Text += "Передача :" + DataString + Environment.NewLine;
                 VisibleTextBox_Strings(DataString,true);
+                convData.LogSystem(Encoding.UTF8.GetBytes(DataString), true, false);
                 //VisibleTextBox_HEXString(DataString);
 
             }
@@ -531,7 +534,7 @@ namespace Simple_Terminal
                 StringFormatData.Text += "Передача :" + String.Format("{0}", mass) + Environment.NewLine;
                 VisibleTextBox_Datastruct(Data,true);
                 VisibleTextBox_HEXDatastruct(Data,true);
-
+                convData.LogSystem(mass, true,true);
             }
             catch(Exception ex)
             {
