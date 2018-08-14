@@ -5,8 +5,118 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App_COMTerminal"
         mc:Ignorable="d"
-        Title="Терминальная программа" Icon="Images/MNIcon.ico"   Height="400" Width="600">
+        Title="Терминальная программа" Icon="Images/MNIcon.ico"   Height="410" Width="600">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.6*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="0.8*" />
+        </Grid.RowDefinitions>
+        <!-- Меню настройки -->
+        <Expander x:Name="ConfigSetting" Grid.Row="0" >
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
+                    <Label Content="Имя Порта:"/>
+                    <ComboBox x:Name="ListNamePORT" >
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
+                    <Label Content="Скорость:"/>
+                    <ComboBox x:Name="SpeedBuad" >
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Vertical">
+                    <Label Content="Формат данных:"/>
+                    <ComboBox x:Name="Format_Data" >
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Vertical">
+                    <Label Content="Бит четности:"/>
+                    <ComboBox x:Name="Parity_BitStatus" >
+                        
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="4" Orientation="Vertical">
+                    <Label Content="Стоп биты:"/>
+                    <ComboBox x:Name="Stop_BitStatus" >
+
+                    </ComboBox>
+                </StackPanel>
+
+                <Button x:Name="btn_Setting" Content="Подключиться" Grid.Row="0" Grid.Column="5" />
+
+            </Grid>
+        </Expander>
+        <!-- |||||||||||||| -->
+        <!-- Поля вывода данных из терминала -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
+                <Label Content="Поток данных" />
+                <RichTextBox x:Name="DataRessieveTransmit_Box" ></RichTextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
+                <Label Content="Поток данных" />
+                <RichTextBox x:Name="DataRessieveTransmit_BoxHEX" ></RichTextBox>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Vertical">
+                <Label Content="Поток данных" />
+                <RichTextBox x:Name="DataRessieveTransmit_BoxBIN" ></RichTextBox>
+            </StackPanel>
+
+        </Grid>
+        <!-- ||||||||||||||-->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition  Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Vertical">
+                <Label Content="Введите данные для передачи:" />
+                <TextBox x:Name="Fill_DataTransmit" />
+            </StackPanel>
+            <Button x:Name="btnTransmitData" Content="Передать данные" Grid.Column="1" />
+        </Grid>
+
+        <StatusBar x:Name="StatusWork" Grid.Row="3">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label Content="Статус работы:"/>
+                    <TextBlock Text="нет соед." Padding="1,5,0,0" />
+
+                    <Label Content="Принято байт:"/>
+                    <TextBlock Text="кол-во" Padding="1,5,0,0" />
+                    
+                    <Label Content="Передано байт:"/>
+                    <TextBlock Text="кол-во" Padding="1,5,0,0" />
+                </StackPanel>
+            </Grid>
+        </StatusBar>
     </Grid>
 </Window>
