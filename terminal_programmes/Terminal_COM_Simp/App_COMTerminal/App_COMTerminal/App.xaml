@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:App_COMTerminal"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/ButtonsStyle.xaml" />
+                <ResourceDictionary Source="Styles/TextElement.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -6,6 +6,13 @@
         xmlns:local="clr-namespace:App_COMTerminal"
         mc:Ignorable="d"
         Title="Терминальная программа" Icon="Images/MNIcon.ico"   Height="410" Width="600">
+    <Window.Background>
+        
+        <LinearGradientBrush>
+            <GradientStop Color="Blue" Offset="0"></GradientStop>
+            <GradientStop Color="Gray" Offset="1"></GradientStop>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1.6*" />
@@ -29,34 +36,34 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
-                    <Label Content="Имя Порта:"/>
+                    <Label Content="Имя Порта:" Style="{StaticResource LabelSet}"/>
                     <ComboBox x:Name="ListNamePORT" >
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
-                    <Label Content="Скорость:"/>
+                    <Label Content="Скорость:" Style="{StaticResource LabelSet}"/>
                     <ComboBox x:Name="SpeedBuad" >
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Vertical">
-                    <Label Content="Формат данных:"/>
+                    <Label Content="Формат данных:" Style="{StaticResource LabelSet}"/>
                     <ComboBox x:Name="Format_Data" >
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Vertical">
-                    <Label Content="Бит четности:"/>
+                    <Label Content="Бит четности:" Style="{StaticResource LabelSet}"/>
                     <ComboBox x:Name="Parity_BitStatus" >
                         
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Row="0" Grid.Column="4" Orientation="Vertical">
-                    <Label Content="Стоп биты:"/>
+                    <Label Content="Стоп биты:" Style="{StaticResource LabelSet}"/>
                     <ComboBox x:Name="Stop_BitStatus" >
 
                     </ComboBox>
                 </StackPanel>
 
-                <Button x:Name="btn_Setting" Content="Подключиться" Grid.Row="0" Grid.Column="5" />
+                <Button x:Name="btn_Setting" Content="Подключиться" Grid.Row="0" Style="{StaticResource Btn_settings}" Grid.Column="5" />
 
             </Grid>
         </Expander>
@@ -73,18 +80,19 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
-                <Label Content="Поток данных" />
-                <RichTextBox x:Name="DataRessieveTransmit_Box" ></RichTextBox>
+                
+                <Label Content="Поток данных" Style="{StaticResource LabelTerFill}" />
+                <RichTextBox x:Name="DataRessieveTransmit_Box" Style="{StaticResource FillTerminal}"  IsReadOnly="True" Height="191" ScrollViewer.VerticalScrollBarVisibility="Auto"></RichTextBox>
             </StackPanel>
 
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
-                <Label Content="Поток данных" />
-                <RichTextBox x:Name="DataRessieveTransmit_BoxHEX" ></RichTextBox>
+                <Label Content="Поток данных" Style="{StaticResource LabelTerFill}"/>
+                <RichTextBox x:Name="DataRessieveTransmit_BoxHEX" Style="{StaticResource FillTerminal}" IsReadOnly="True" Height="191"  ScrollViewer.VerticalScrollBarVisibility="Auto"></RichTextBox>
             </StackPanel>
             
             <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Vertical">
-                <Label Content="Поток данных" />
-                <RichTextBox x:Name="DataRessieveTransmit_BoxBIN" ></RichTextBox>
+                <Label Content="Поток данных" Style="{StaticResource LabelTerFill}"/>
+                <RichTextBox x:Name="DataRessieveTransmit_BoxBIN" Style="{StaticResource FillTerminal}" IsReadOnly="True" Height="191"  ScrollViewer.VerticalScrollBarVisibility="Auto"></RichTextBox>
             </StackPanel>
 
         </Grid>
