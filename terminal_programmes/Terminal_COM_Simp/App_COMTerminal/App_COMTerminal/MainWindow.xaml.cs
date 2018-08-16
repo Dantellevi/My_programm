@@ -20,6 +20,15 @@ namespace App_COMTerminal
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private List<int> SpeedBaudL;//список скоростей порта
+        private string NamePortL;//имя порта
+        private List<string> formatDataL;//формат данных
+        private List<string> bitParityL;//бит четности
+        private List<string> stopBitsL;//стоп бит
+
+
+
         public MainWindow()
         {
             InitializeComponent();
