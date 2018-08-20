@@ -63,7 +63,7 @@
                     </ComboBox>
                 </StackPanel>
 
-                <Button x:Name="btn_Setting" Content="Подключиться" Grid.Row="0" Style="{StaticResource Btn_settings}" Grid.Column="5" />
+                <Button x:Name="btn_Setting" Click="btn_Setting_Click" Content="Подключиться" Grid.Row="0" Style="{StaticResource Btn_settings}" Grid.Column="5" />
 
             </Grid>
         </Expander>
@@ -79,33 +79,24 @@
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
+            <Label Content="Поток данных" Style="{StaticResource LabelTerFill}" Grid.Row="0" Grid.Column="0" />
+            <RichTextBox x:Name="DataRessieveTransmit_Box"  Style="{StaticResource FillTerminal}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch"  IsReadOnly="True"  ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="1,39,1,10" ></RichTextBox>
 
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*" />
-                        <RowDefinition  />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Поток данных" Style="{StaticResource LabelTerFill}" Grid.Row="0" Grid.Column="0" />
-                    <RichTextBox x:Name="DataRessieveTransmit_Box"  Style="{StaticResource FillTerminal}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom"  IsReadOnly="True"  ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="1,100,1,10" ></RichTextBox>
 
-                </Grid>
-                
-                
-            </StackPanel>
 
-            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
-                <Label Content="Поток данных" Style="{StaticResource LabelTerFill}"/>
-                <RichTextBox x:Name="DataRessieveTransmit_BoxHEX" Style="{StaticResource FillTerminal}" IsReadOnly="True" Height="191"  ScrollViewer.VerticalScrollBarVisibility="Auto"></RichTextBox>
-            </StackPanel>
+
+
+
+
+
+            <Label Content="Поток данных" Style="{StaticResource LabelTerFill}"  Grid.Row="0" Grid.Column="1" />
+            <RichTextBox x:Name="DataRessieveTransmit_BoxHEX" Style="{StaticResource FillTerminal}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="1" Margin="1,39,1,10"></RichTextBox>
+
+
+
+            <Label Content="Поток данных" Style="{StaticResource LabelTerFill}" Grid.Row="0" Grid.Column="2"/>
+            <RichTextBox x:Name="DataRessieveTransmit_BoxBIN" Style="{StaticResource FillTerminal}" Grid.Row="0" Grid.Column="2" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="1,39,1,10"></RichTextBox>
             
-            <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Vertical">
-                <Label Content="Поток данных" Style="{StaticResource LabelTerFill}"/>
-                <RichTextBox x:Name="DataRessieveTransmit_BoxBIN" Style="{StaticResource FillTerminal}" IsReadOnly="True" Height="191"  ScrollViewer.VerticalScrollBarVisibility="Auto"></RichTextBox>
-            </StackPanel>
 
         </Grid>
         <!-- ||||||||||||||-->

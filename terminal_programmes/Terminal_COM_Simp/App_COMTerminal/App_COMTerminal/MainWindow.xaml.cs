@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO.Ports;
+
 
 namespace App_COMTerminal
 {
@@ -21,18 +23,46 @@ namespace App_COMTerminal
     public partial class MainWindow : Window
     {
 
-        private List<int> SpeedBaudL;//список скоростей порта
-        private string NamePortL;//имя порта
-        private List<string> formatDataL;//формат данных
-        private List<string> bitParityL;//бит четности
-        private List<string> stopBitsL;//стоп бит
-
-
-
+        SerialPort _dataport;
+        Convert_dataList _Listdata;
         public MainWindow()
         {
             InitializeComponent();
-           
+            _Listdata = new Convert_dataList();
+            _Listdata.FillList();
+            GetDataList();
+            _dataport = new SerialPort();
+
+        }
+
+        /// <summary>
+        /// Функция заполнения Combobox-ов
+        /// </summary>
+        void GetDataList()
+        {
+            ListNamePORT.ItemsSource = _Listdata.PortComName;
+            SpeedBuad.ItemsSource = _Listdata.Baud;
+            Format_Data.ItemsSource = _Listdata.Format;
+            Parity_BitStatus.ItemsSource = _Listdata.bitParity;
+            Stop_BitStatus.ItemsSource = _Listdata.StopBit;
+        }
+
+
+        private void btn_Setting_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (ListNamePORT.SelectedIndex!=-1 && SpeedBuad.SelectedIndex!=-1 &&
+                    Format_Data.SelectedIndex!=-1 && Parity_BitStatus.SelectedIndex!=-1 && Stop_BitStatus.SelectedIndex!=-1)
+                {
+
+                }
+            }
+            catch(Exception exs)
+            {
+                MessageBox.Show("Ошибка!!!" + exs.Message);
+            }
+            
 
         }
     }
