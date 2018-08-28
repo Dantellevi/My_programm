@@ -26,6 +26,51 @@ namespace App_COMTerminal
         private string _stopBits;//выбранное количество стоп битов
 
 
+        public string _NamePort_
+        {
+            
+            set
+            {
+                _NamePort = value;
+            }
+        }
+
+        public long _speed_
+        {
+            set
+            {
+                _speed = value;
+            }
+        }
+
+        public int _format_
+        {
+            set
+            {
+                _format = value;
+            }
+        }
+
+        public string _bitP_
+        {
+            set
+            {
+                _bitP = value;
+
+            }
+        }
+
+        public string _stopBit_
+        {
+            set
+            {
+                _stopBits = value;
+            }
+        }
+
+
+
+
 
         #region Свойства для возврата
 
@@ -125,8 +170,51 @@ namespace App_COMTerminal
 
         } 
 
+       
+
+        public void Connect(ref SerialPort data)
+        {
+            data.PortName = _NamePort;
+            data.DataBits = _format;
+            data.BaudRate = (int)_speed;
 
 
+            switch(_bitP)
+            {
+                case "1 бит четности":
+                    {
+                        data.Parity = Parity.Mark;
+                        break;
+                    }
+                case "нет битов четности":
+                    {
+                        data.Parity = Parity.None;
+                        break;
+                    }
+            }
+
+            switch(_stopBits)
+            {
+                case "1 стоп бит":
+                    {
+                        data.StopBits = StopBits.One;
+                        break;
+                    }
+                case "2 стоп бита":
+                    {
+                        data.StopBits = StopBits.Two;
+                        break;
+                    }
+
+            }
+
+            data.Open();
+
+
+
+
+
+        }
 
 
     }
