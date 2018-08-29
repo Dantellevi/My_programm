@@ -107,9 +107,9 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Orientation="Vertical">
                 <Label Content="Введите данные для передачи:" />
-                <TextBox x:Name="Fill_DataTransmit" />
+                <TextBox x:Name="Fill_DataTransmit" KeyDown="Fill_DataTransmit_KeyDown"  />
             </StackPanel>
-            <Button x:Name="btnTransmitData" Content="Передать данные" Click="btnTransmitData_Click" Grid.Column="1" Style="{StaticResource Btn_SendData}" />
+            <Button x:Name="btnTransmitData" IsEnabled="False" Content="Передать данные" Click="btnTransmitData_Click" Grid.Column="1" Style="{StaticResource Btn_SendData}" />
         </Grid>
 
         <StatusBar x:Name="StatusWork" Grid.Row="3" Style="{StaticResource StatusStyle}">

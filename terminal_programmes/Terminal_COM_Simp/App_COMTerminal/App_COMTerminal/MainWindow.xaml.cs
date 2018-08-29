@@ -79,11 +79,13 @@ namespace App_COMTerminal
                         _Listdata._stopBit_ = Stop_BitStatus.Text;
                         _Listdata.Connect(ref _dataport);//Функция инициализации порта и подключения  к порту
                         btn_Setting.Content = "Соединение установлено";
+                        btnTransmitData.IsEnabled = true;
                         _dataport.DataReceived += _dataport_DataReceived;
                     }
                     else
                     {
                         btn_Setting.Content = "Подключиться";
+                        btnTransmitData.IsEnabled = false;
                         Disconnect();
                     }
 
@@ -171,6 +173,20 @@ namespace App_COMTerminal
         {
             Transmit_String(Fill_DataTransmit.Text);
 
+        }
+
+
+        /// <summary>
+        /// Обработчик нажатия кнопки ENTER
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Fill_DataTransmit_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key==Key.Enter)
+            {
+                Transmit_String(Fill_DataTransmit.Text);
+            }
         }
     }
 }
