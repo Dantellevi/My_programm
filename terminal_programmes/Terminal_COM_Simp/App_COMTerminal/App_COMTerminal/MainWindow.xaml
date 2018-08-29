@@ -80,7 +80,7 @@
             </Grid.ColumnDefinitions>
 
             <Label Content="Поток данных" Style="{StaticResource LabelTerFill}" Grid.Row="0" Grid.Column="0" />
-            <RichTextBox x:Name="DataRessieveTransmit_Box"  Style="{StaticResource FillTerminal}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch"  IsReadOnly="True"  ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="1,39,1,10" ></RichTextBox>
+            <TextBox x:Name="DataRessieveTransmit_Box"   Style="{StaticResource FillTerminal}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch"  IsReadOnly="True"  ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="1,39,1,10" ></TextBox>
 
 
 
@@ -90,12 +90,12 @@
 
 
             <Label Content="Поток данных" Style="{StaticResource LabelTerFill}"  Grid.Row="0" Grid.Column="1" />
-            <RichTextBox x:Name="DataRessieveTransmit_BoxHEX" Style="{StaticResource FillTerminal}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="1" Margin="1,39,1,10"></RichTextBox>
+            <TextBox x:Name="DataRessieveTransmit_BoxHEX" Style="{StaticResource FillTerminal}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="1" Margin="1,39,1,10"></TextBox>
 
 
 
             <Label Content="Поток данных" Style="{StaticResource LabelTerFill}" Grid.Row="0" Grid.Column="2"/>
-            <RichTextBox x:Name="DataRessieveTransmit_BoxBIN" Style="{StaticResource FillTerminal}" Grid.Row="0" Grid.Column="2" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="1,39,1,10"></RichTextBox>
+            <TextBox x:Name="DataRessieveTransmit_BoxBIN" Style="{StaticResource FillTerminal}" Grid.Row="0" Grid.Column="2" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="1,39,1,10"></TextBox>
             
 
         </Grid>
@@ -109,7 +109,7 @@
                 <Label Content="Введите данные для передачи:" />
                 <TextBox x:Name="Fill_DataTransmit" />
             </StackPanel>
-            <Button x:Name="btnTransmitData" Content="Передать данные" Grid.Column="1" Style="{StaticResource Btn_SendData}" />
+            <Button x:Name="btnTransmitData" Content="Передать данные" Click="btnTransmitData_Click" Grid.Column="1" Style="{StaticResource Btn_SendData}" />
         </Grid>
 
         <StatusBar x:Name="StatusWork" Grid.Row="3" Style="{StaticResource StatusStyle}">

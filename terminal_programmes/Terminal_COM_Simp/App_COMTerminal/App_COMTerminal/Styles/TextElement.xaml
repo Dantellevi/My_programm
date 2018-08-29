@@ -19,7 +19,7 @@
         </Style.Setters>
     </Style>
 
-    <Style x:Key="FillTerminal" TargetType="RichTextBox">
+    <Style x:Key="FillTerminal" TargetType="TextBox">
         <Style.Setters>
             
             <Setter Property="Margin" Value="1,1,1,1" />

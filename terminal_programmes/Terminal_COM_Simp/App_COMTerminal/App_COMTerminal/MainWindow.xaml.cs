@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO.Ports;
-
+using System.Threading;
 
 namespace App_COMTerminal
 {
@@ -106,12 +106,71 @@ namespace App_COMTerminal
         /// <param name="e"></param>
         private void _dataport_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            
+            Thread.Sleep(50);
+            string dataRes = _dataport.ReadLine();
+            Dispatcher.BeginInvoke(new ReadStringCOM(VisibleTexbox_String), new object[] { dataRes });
+            //логирование
+
+        }
+
+        /// <summary>
+        /// Метод отображения в поле текстбокса  данных принимаемых ввид строки и HEX
+        /// </summary>
+        /// <param name="data"></param>
+        private void VisibleTexbox_String(string data)
+        {
+            DataRessieveTransmit_Box.Text += String.Format("Прием данных[{0}]:{1}"+Environment.NewLine, DateTime.Now, data);
+            //Hex
+            DataRessieveTransmit_BoxHEX.Text+= String.Format("Прием данных[{0}]:0x{1:X}"+Environment.NewLine, DateTime.Now, data);//не работает
+            //bin
+            byte[] StrBytes = System.Text.Encoding.ASCII.GetBytes(data);
+            DataRessieveTransmit_BoxBIN.Text += String.Format("Прием данных[{0}]:{1}"+Environment.NewLine, DateTime.Now, StrBytes.ToString());//не работает
+
+
+
+
         }
 
         private void Disconnect()
         {
             _dataport.Close();
+        }
+
+        /// <summary>
+        /// Функция передачи данных из текстбокса
+        /// </summary>
+        /// <param name="DataString"></param>
+        private void Transmit_String(string DataString)
+        {
+            try
+            {
+                _dataport.WriteLine(String.Format("{0}", DataString));
+                Fill_DataTransmit.Clear();
+                DataRessieveTransmit_Box.Text += String.Format("Передача[{0}]:{1}" + Environment.NewLine, DateTime.Now, DataString);
+                //отображение в поле 16-битного значения
+                DataRessieveTransmit_BoxHEX.Text += String.Format("Передача данных[{0}]:0x{1:X}"+Environment.NewLine, DateTime.Now, DataString);//не работает
+
+                //отображения в поле 2-раз. значения
+                byte[] StrBytes = System.Text.Encoding.ASCII.GetBytes(DataString);
+                DataRessieveTransmit_BoxBIN.Text += String.Format("Передача данных[{0}]:{1}" + Environment.NewLine, DateTime.Now, StrBytes.ToString());//не работает
+                //логирования
+
+            }
+            catch(Exception exs)
+            {
+                MessageBox.Show("Ошибка передачи: " + exs.Message);
+            }
+        }
+
+        /// <summary>
+        /// Обработчик события кнопки передачи данных
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnTransmitData_Click(object sender, RoutedEventArgs e)
+        {
+            Transmit_String(Fill_DataTransmit.Text);
+
         }
     }
 }
