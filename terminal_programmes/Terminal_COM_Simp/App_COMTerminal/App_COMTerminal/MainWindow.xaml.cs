@@ -149,12 +149,14 @@ namespace App_COMTerminal
                 _dataport.WriteLine(String.Format("{0}", DataString));
                 Fill_DataTransmit.Clear();
                 DataRessieveTransmit_Box.Text += String.Format("Передача[{0}]:{1}" + Environment.NewLine, DateTime.Now, DataString);
+                
                 //отображение в поле 16-битного значения
                 DataRessieveTransmit_BoxHEX.Text += String.Format("Передача данных[{0}]:0x{1:X}"+Environment.NewLine, DateTime.Now, DataString);//не работает
-
+                
                 //отображения в поле 2-раз. значения
                 byte[] StrBytes = System.Text.Encoding.ASCII.GetBytes(DataString);
                 DataRessieveTransmit_BoxBIN.Text += String.Format("Передача данных[{0}]:{1}" + Environment.NewLine, DateTime.Now, StrBytes.ToString());//не работает
+                CursorEndPoint();
                 //логирования
 
             }
@@ -188,5 +190,21 @@ namespace App_COMTerminal
                 Transmit_String(Fill_DataTransmit.Text);
             }
         }
+
+
+        /// <summary>
+        /// Функция перевода курсора в конец бокса
+        /// </summary>
+        private void CursorEndPoint()
+        {
+            DataRessieveTransmit_Box.SelectionStart = DataRessieveTransmit_Box.Text.Length;
+            DataRessieveTransmit_BoxHEX.SelectionStart = DataRessieveTransmit_BoxHEX.Text.Length;
+            DataRessieveTransmit_BoxBIN.SelectionStart = DataRessieveTransmit_BoxBIN.Text.Length;
+
+        }
     }
 }
+
+
+
+
