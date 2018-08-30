@@ -72,6 +72,7 @@ namespace App_COMTerminal
                     cntBtn_setting++;
                     if (cntBtn_setting % 2 == 0)
                     {
+                        Status_Connect.Text = "Соединение установлено";
                         _Listdata._NamePort_ = ListNamePORT.Text;
                         _Listdata._speed_ =long.Parse(SpeedBuad.Text);
                         _Listdata._format_ = int.Parse(Format_Data.Text);
@@ -85,6 +86,7 @@ namespace App_COMTerminal
                     else
                     {
                         btn_Setting.Content = "Подключиться";
+                        Status_Connect.Text = "Соединение разорвано.";
                         btnTransmitData.IsEnabled = false;
                         Disconnect();
                     }
@@ -127,7 +129,9 @@ namespace App_COMTerminal
             //bin
             byte[] StrBytes = System.Text.Encoding.ASCII.GetBytes(data);
             DataRessieveTransmit_BoxBIN.Text += String.Format("Прием данных[{0}]:{1}"+Environment.NewLine, DateTime.Now, StrBytes.ToString());//не работает
-
+            int Bytes;
+            Calculate_Byte(out Bytes, data);//подсчитываем кол-во байтов
+            Count_RBytes.Text = Bytes.ToString()+" байт";
 
 
 
@@ -157,6 +161,9 @@ namespace App_COMTerminal
                 byte[] StrBytes = System.Text.Encoding.ASCII.GetBytes(DataString);
                 DataRessieveTransmit_BoxBIN.Text += String.Format("Передача данных[{0}]:{1}" + Environment.NewLine, DateTime.Now, StrBytes.ToString());//не работает
                 CursorEndPoint();
+                int Bytes;
+                Calculate_Byte(out Bytes, DataString);//подсчитываем кол-во байтов
+                Count_TBytes.Text = Bytes.ToString() + " байт";
                 //логирования
 
             }
@@ -202,7 +209,30 @@ namespace App_COMTerminal
             DataRessieveTransmit_BoxBIN.SelectionStart = DataRessieveTransmit_BoxBIN.Text.Length;
 
         }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            
+        }
+
+
+        /// <summary>
+        /// Функция подсчета байтов
+        /// </summary>
+        /// <param name="Bytes"></param>
+        /// <param name="Data"></param>
+        private void Calculate_Byte(out int Bytes,string Data)
+        {
+            Bytes = 0;
+            Bytes = Encoding.ASCII.GetByteCount(Data);
+
+        }
+
     }
+
+
+
+
 }
 
 

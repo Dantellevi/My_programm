@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App_COMTerminal"
         mc:Ignorable="d"
-        Title="Терминальная программа" Icon="Images/MNIcon.ico"   Height="410" Width="600">
+        Title="Терминальная программа" Icon="Images/MNIcon.ico"   Height="410" Width="600" SizeChanged="Window_SizeChanged">
     <Window.Background>
         
         <LinearGradientBrush>
@@ -35,33 +35,33 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
-                    <Label Content="Имя Порта:" Style="{StaticResource LabelSet}"/>
-                    <ComboBox x:Name="ListNamePORT" >
+                
+                    <Label Content="Имя Порта:" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelSet}"/>
+                <ComboBox x:Name="ListNamePORT" Grid.Row="0" Grid.Column="0" Margin="1,25,1,1" Height="20" >
                     </ComboBox>
-                </StackPanel>
-                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
-                    <Label Content="Скорость:" Style="{StaticResource LabelSet}"/>
-                    <ComboBox x:Name="SpeedBuad" >
+                
+                
+                    <Label Content="Скорость:" Grid.Row="0" Grid.Column="1" Style="{StaticResource LabelSet}"/>
+                <ComboBox x:Name="SpeedBuad" Grid.Row="0" Grid.Column="1" Margin="1,25,1,1" Height="20" >
                     </ComboBox>
-                </StackPanel>
-                <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Vertical">
-                    <Label Content="Формат данных:" Style="{StaticResource LabelSet}"/>
-                    <ComboBox x:Name="Format_Data" >
+                
+                
+                    <Label Content="Формат данных:" Grid.Row="0" Grid.Column="2" Style="{StaticResource LabelSet}"/>
+                <ComboBox x:Name="Format_Data" Grid.Row="0" Grid.Column="2" Margin="1,25,1,1" Height="20" >
                     </ComboBox>
-                </StackPanel>
-                <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Vertical">
-                    <Label Content="Бит четности:" Style="{StaticResource LabelSet}"/>
-                    <ComboBox x:Name="Parity_BitStatus" >
+                
+                
+                    <Label Content="Бит четности:" Grid.Row="0" Grid.Column="3" Style="{StaticResource LabelSet}"/>
+                <ComboBox x:Name="Parity_BitStatus" Grid.Row="0" Grid.Column="3" Margin="1,25,1,1" Height="20" >
                         
                     </ComboBox>
-                </StackPanel>
-                <StackPanel Grid.Row="0" Grid.Column="4" Orientation="Vertical">
-                    <Label Content="Стоп биты:" Style="{StaticResource LabelSet}"/>
-                    <ComboBox x:Name="Stop_BitStatus" >
+                
+                
+                    <Label Content="Стоп биты:" Grid.Row="0" Grid.Column="4" Style="{StaticResource LabelSet}"/>
+                <ComboBox x:Name="Stop_BitStatus" Grid.Row="0" Grid.Column="4" Margin="1,25,1,1" Height="20" >
 
                     </ComboBox>
-                </StackPanel>
+                
 
                 <Button x:Name="btn_Setting" Click="btn_Setting_Click" Content="Подключиться" Grid.Row="0" Style="{StaticResource Btn_settings}" Grid.Column="5" />
 
@@ -105,10 +105,10 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition  Width="1*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Orientation="Vertical">
-                <Label Content="Введите данные для передачи:" />
-                <TextBox x:Name="Fill_DataTransmit" KeyDown="Fill_DataTransmit_KeyDown"  />
-            </StackPanel>
+
+            <Label Content="Введите данные для передачи:" Style="{StaticResource LabelTerFill}" Grid.Column="0" />
+                <TextBox x:Name="Fill_DataTransmit" Grid.Column="0" Margin="1,25,1,1" MaxHeight="30" KeyDown="Fill_DataTransmit_KeyDown"  />
+            
             <Button x:Name="btnTransmitData" IsEnabled="False" Content="Передать данные" Click="btnTransmitData_Click" Grid.Column="1" Style="{StaticResource Btn_SendData}" />
         </Grid>
 
@@ -119,13 +119,13 @@
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Orientation="Horizontal">
                     <Label Content="Статус работы:" Style="{StaticResource LabelStatus}"/>
-                    <TextBlock Text="нет соед." Padding="1,5,0,0" Style="{StaticResource TextStatus}" />
+                    <TextBlock x:Name="Status_Connect" Text="нет соед." Padding="1,5,0,0" Style="{StaticResource TextStatus}" />
 
                     <Label Content="Принято байт:" Margin="200,0,1,0" Style="{StaticResource LabelStatus}"/>
-                    <TextBlock Text="кол-во" Padding="1,5,0,0" Style="{StaticResource TextStatus}" />
+                    <TextBlock x:Name="Count_RBytes" Text="кол-во" Padding="1,5,0,0" Style="{StaticResource TextStatus}" />
 
                     <Label Content="Передано байт:" Margin="50,0,1,0" Style="{StaticResource LabelStatus}"/>
-                    <TextBlock Text="кол-во" Padding="1,5,0,0" Style="{StaticResource TextStatus}" />
+                    <TextBlock x:Name="Count_TBytes" Text="кол-во" Padding="1,5,0,0" Style="{StaticResource TextStatus}" />
                 </StackPanel>
             </Grid>
         </StatusBar>
