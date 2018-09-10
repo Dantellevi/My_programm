@@ -10,7 +10,7 @@ namespace App_COMTerminal
 
    public struct SettingUsart
     {
-        public  int speed;
+        public long  speed;
         public string NamePort;
         public string Parity;
         public string Format;
@@ -28,6 +28,7 @@ namespace App_COMTerminal
         public LogSystem()
         {
             NameLogFile = "LogFile_" + DateTime.Now.ToString() + ".txt";
+            NameLogFile = NameLogFile.Replace(':', '_');
             path = Path.GetFullPath(@"" + NameLogFile);
             fi1 = new FileInfo(path);
         }
@@ -38,10 +39,14 @@ namespace App_COMTerminal
         /// </summary>
         public void LogirateStart ()
         {
-            if(!fi1.Exists)
+
+            using (sw = new StreamWriter(path))
             {
-                sw = new StreamWriter(path);
+                sw.WriteLine("Start LOG!!!\n");
             }
+
+
+
         }
 
         /// <summary>
@@ -50,24 +55,28 @@ namespace App_COMTerminal
         /// <param name="data"></param>
         public void LogRecord(string data,bool Mode_T_R, SettingUsart dat)
         {
-            string Data_s;
-            if(Mode_T_R)
+            using ( sw = fi1.AppendText())
             {
-                Data_s = String.Format("Передача[{0}]:[Скорость:{1},Формат:{2},СтопБит:{3},Бит четности:{4},Имя порта:{5}]:{6}", DateTime.Now, dat.speed, dat.Format, dat.StopBits, dat.Parity, dat.NamePort, data);
-                sw.WriteLine(Data_s);
-                //записать в бинарном виде
 
-                sw.WriteLine("--------------------------------------------");
-            }
-            else if(!Mode_T_R)
-            {
-                Data_s = String.Format("Прием[{0}]:[Скорость:{1},Формат:{2},СтопБит:{3},Бит четности:{4},Имя порта:{5}]:{6}", DateTime.Now, dat.speed, dat.Format, dat.StopBits, dat.Parity, dat.NamePort, data);
-                sw.WriteLine(Data_s);
-                //записать в бинарном виде
 
-                sw.WriteLine("--------------------------------------------");
+                string Data_s;
+                if (Mode_T_R)
+                {
+                    Data_s = String.Format("Передача[{0}]:[Скорость:{1},Формат:{2},СтопБит:{3},Бит четности:{4},Имя порта:{5}]:{6}", DateTime.Now, dat.speed, dat.Format, dat.StopBits, dat.Parity, dat.NamePort, data);
+                    sw.WriteLine(Data_s);
+                    //записать в бинарном виде
+
+                    sw.WriteLine("--------------------------------------------");
+                }
+                else if (!Mode_T_R)
+                {
+                    Data_s = String.Format("Прием[{0}]:[Скорость:{1},Формат:{2},СтопБит:{3},Бит четности:{4},Имя порта:{5}]:{6}", DateTime.Now, dat.speed, dat.Format, dat.StopBits, dat.Parity, dat.NamePort, data);
+                    sw.WriteLine(Data_s);
+                    //записать в бинарном виде
+
+                    sw.WriteLine("--------------------------------------------");
+                }
             }
-           
         }
 
 

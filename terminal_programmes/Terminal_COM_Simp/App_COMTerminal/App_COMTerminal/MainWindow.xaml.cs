@@ -25,13 +25,16 @@ namespace App_COMTerminal
         private int cntBtn_setting=1;
         SerialPort _dataport;
         Convert_dataList _Listdata;
-
+        LogSystem LogR;
+        SettingUsart su;
         private delegate void ReadStringCOM(string data);// делегат для работы на прием данных в отдельном потоке
 
 
         public MainWindow()
         {
             InitializeComponent();
+             LogR = new LogSystem();
+            LogR.LogirateStart();
             _Listdata = new Convert_dataList();
             _Listdata.FillList();
             GetDataList();
@@ -81,6 +84,15 @@ namespace App_COMTerminal
                         _Listdata.Connect(ref _dataport);//Функция инициализации порта и подключения  к порту
                         btn_Setting.Content = "Соединение установлено";
                         btnTransmitData.IsEnabled = true;
+                       su = new SettingUsart()
+                        {
+                            speed = long.Parse(SpeedBuad.Text),
+                            NamePort = ListNamePORT.Text,
+                            Parity= Parity_BitStatus.Text,
+                            Format= Format_Data.Text,
+                           StopBits= Stop_BitStatus.Text
+
+                       };
                         _dataport.DataReceived += _dataport_DataReceived;
                     }
                     else
@@ -114,7 +126,7 @@ namespace App_COMTerminal
             string dataRes = _dataport.ReadLine();
             Dispatcher.BeginInvoke(new ReadStringCOM(VisibleTexbox_String), new object[] { dataRes });
             //логирование
-
+            LogR.LogRecord(dataRes, false, su);
         }
 
         /// <summary>
@@ -165,7 +177,7 @@ namespace App_COMTerminal
                 Calculate_Byte(out Bytes, DataString);//подсчитываем кол-во байтов
                 Count_TBytes.Text = Bytes.ToString() + " байт";
                 //логирования
-
+                LogR.LogRecord(DataString, true, su);
             }
             catch(Exception exs)
             {
