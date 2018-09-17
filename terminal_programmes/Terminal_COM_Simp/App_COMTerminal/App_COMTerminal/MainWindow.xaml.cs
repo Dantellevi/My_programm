@@ -27,6 +27,8 @@ namespace App_COMTerminal
         Convert_dataList _Listdata;
         LogSystem LogR;
         SettingUsart su;
+        int BytesTransmit=0;
+        int BytesRessieve = 0;
         private delegate void ReadStringCOM(string data);// делегат для работы на прием данных в отдельном потоке
 
 
@@ -84,7 +86,8 @@ namespace App_COMTerminal
                         _Listdata.Connect(ref _dataport);//Функция инициализации порта и подключения  к порту
                         btn_Setting.Content = "Соединение установлено";
                         btnTransmitData.IsEnabled = true;
-                       su = new SettingUsart()
+                        MessageBox.Show("Соединение установлено!!!!");
+                        su = new SettingUsart()
                         {
                             speed = long.Parse(SpeedBuad.Text),
                             NamePort = ListNamePORT.Text,
@@ -93,12 +96,14 @@ namespace App_COMTerminal
                            StopBits= Stop_BitStatus.Text
 
                        };
+                       
                         _dataport.DataReceived += _dataport_DataReceived;
                     }
                     else
                     {
                         btn_Setting.Content = "Подключиться";
                         Status_Connect.Text = "Соединение разорвано.";
+                        MessageBox.Show("Розрыв соединения!!!!");
                         btnTransmitData.IsEnabled = false;
                         Disconnect();
                     }
@@ -137,13 +142,16 @@ namespace App_COMTerminal
         {
             DataRessieveTransmit_Box.Text += String.Format("Прием данных[{0}]:{1}"+Environment.NewLine, DateTime.Now, data);
             //Hex
-            DataRessieveTransmit_BoxHEX.Text+= String.Format("Прием данных[{0}]:0x{1:X}"+Environment.NewLine, DateTime.Now, data);//не работает
+            byte[] dataBytes = Encoding.Default.GetBytes(data);
+            DataRessieveTransmit_BoxHEX.Text+= String.Format("Прием данных[{0}]:{1}"+Environment.NewLine, DateTime.Now, dataBytes);
             //bin
             byte[] StrBytes = System.Text.Encoding.ASCII.GetBytes(data);
             DataRessieveTransmit_BoxBIN.Text += String.Format("Прием данных[{0}]:{1}"+Environment.NewLine, DateTime.Now, StrBytes.ToString());//не работает
-            int Bytes;
-            Calculate_Byte(out Bytes, data);//подсчитываем кол-во байтов
-            Count_RBytes.Text = Bytes.ToString()+" байт";
+            
+           
+
+            BytesRessieve= Calculate_Byte(BytesRessieve, data);//подсчитываем кол-во байтов
+            Count_RBytes.Text = BytesRessieve.ToString()+" байт";
 
 
 
@@ -165,17 +173,25 @@ namespace App_COMTerminal
                 _dataport.WriteLine(String.Format("{0}", DataString));
                 Fill_DataTransmit.Clear();
                 DataRessieveTransmit_Box.Text += String.Format("Передача[{0}]:{1}" + Environment.NewLine, DateTime.Now, DataString);
-                
+
                 //отображение в поле 16-битного значения
-                DataRessieveTransmit_BoxHEX.Text += String.Format("Передача данных[{0}]:0x{1:X}"+Environment.NewLine, DateTime.Now, DataString);//не работает
+                byte[] inVar = Encoding.ASCII.GetBytes(DataString);
+                StringBuilder sb = new StringBuilder();
+                DataRessieveTransmit_BoxHEX.Text += String.Format("Передача данных[{0}]:" + Environment.NewLine, DateTime.Now);
+                foreach (byte b in inVar)
+                {
+                    sb.Append(b);
+                    DataRessieveTransmit_BoxHEX.Text += String.Format("0x{0:X}" + Environment.NewLine, b.ToString("X2"));
+                    
+                }
                 
                 //отображения в поле 2-раз. значения
                 byte[] StrBytes = System.Text.Encoding.ASCII.GetBytes(DataString);
                 DataRessieveTransmit_BoxBIN.Text += String.Format("Передача данных[{0}]:{1}" + Environment.NewLine, DateTime.Now, StrBytes.ToString());//не работает
                 CursorEndPoint();
-                int Bytes;
-                Calculate_Byte(out Bytes, DataString);//подсчитываем кол-во байтов
-                Count_TBytes.Text = Bytes.ToString() + " байт";
+
+                BytesTransmit = Calculate_Byte(BytesTransmit, DataString);//подсчитываем кол-во байтов
+                Count_TBytes.Text = BytesTransmit.ToString() + " байт";
                 //логирования
                 LogR.LogRecord(DataString, true, su);
             }
@@ -240,6 +256,35 @@ namespace App_COMTerminal
 
         }
 
+        /// <summary>
+        /// Функция подсчета байтов
+        /// </summary>
+        /// <param name="Bytes"></param>
+        /// <param name="Data"></param>
+        private int Calculate_Byte(int Bytes, string Data)
+        {
+            return Bytes += Encoding.ASCII.GetByteCount(Data);
+           
+        }
+
+        private void DataRessieveTransmit_Box_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            DataRessieveTransmit_Box.SelectionStart = DataRessieveTransmit_Box.Text.Length;
+            DataRessieveTransmit_Box.ScrollToEnd();
+
+        }
+
+        private void DataRessieveTransmit_BoxHEX_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            DataRessieveTransmit_BoxHEX.SelectionStart = DataRessieveTransmit_Box.Text.Length;
+            DataRessieveTransmit_BoxHEX.ScrollToEnd();
+        }
+
+        private void DataRessieveTransmit_BoxBIN_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            DataRessieveTransmit_BoxBIN.SelectionStart = DataRessieveTransmit_Box.Text.Length;
+            DataRessieveTransmit_BoxBIN.ScrollToEnd();
+        }
     }
 
 
