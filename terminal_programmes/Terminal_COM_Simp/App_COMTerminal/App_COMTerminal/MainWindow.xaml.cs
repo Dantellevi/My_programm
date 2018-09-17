@@ -141,16 +141,44 @@ namespace App_COMTerminal
         private void VisibleTexbox_String(string data)
         {
             DataRessieveTransmit_Box.Text += String.Format("Прием данных[{0}]:{1}"+Environment.NewLine, DateTime.Now, data);
-            //Hex
-            byte[] dataBytes = Encoding.Default.GetBytes(data);
-            DataRessieveTransmit_BoxHEX.Text+= String.Format("Прием данных[{0}]:{1}"+Environment.NewLine, DateTime.Now, dataBytes);
-            //bin
-            byte[] StrBytes = System.Text.Encoding.ASCII.GetBytes(data);
-            DataRessieveTransmit_BoxBIN.Text += String.Format("Прием данных[{0}]:{1}"+Environment.NewLine, DateTime.Now, StrBytes.ToString());//не работает
-            
-           
 
-            BytesRessieve= Calculate_Byte(BytesRessieve, data);//подсчитываем кол-во байтов
+            //отображение в поле 16-битного значения
+            byte[] inVar = Encoding.ASCII.GetBytes(data);
+            StringBuilder sb = new StringBuilder();
+            DataRessieveTransmit_BoxHEX.Text += String.Format("Передача данных[{0}]:" + Environment.NewLine, DateTime.Now);
+            foreach (byte b in inVar)
+            {
+                sb.Append(b);
+                DataRessieveTransmit_BoxHEX.Text += String.Format("0x{0:X}" + Environment.NewLine, b.ToString("X2"));
+
+            }
+
+            //отображения в поле 2-раз. значения
+            byte[] StrBytes = System.Text.Encoding.ASCII.GetBytes(data);
+            StringBuilder sbb = new StringBuilder();
+            DataRessieveTransmit_BoxBIN.Text += String.Format("Передача данных[{0}]:" + Environment.NewLine, DateTime.Now);
+            foreach (byte b in StrBytes)
+            {
+                sbb.Append(Convert.ToString(b, 2).PadLeft(8, '0')).Append(' ');
+
+            }
+            string binaryStr = sbb.ToString();
+            string mass_bin = null;
+
+            for (int i = 0; i < binaryStr.Length; i++)
+            {
+                if (binaryStr[i] == ' ')
+                {
+                    mass_bin += binaryStr[i];
+                    DataRessieveTransmit_BoxBIN.Text += "0b" + mass_bin + Environment.NewLine;
+                    mass_bin = null;
+                    continue;
+                }
+                mass_bin += binaryStr[i];
+            }
+
+
+            BytesRessieve = Calculate_Byte(BytesRessieve, data);//подсчитываем кол-во байтов
             Count_RBytes.Text = BytesRessieve.ToString()+" байт";
 
 
@@ -187,7 +215,28 @@ namespace App_COMTerminal
                 
                 //отображения в поле 2-раз. значения
                 byte[] StrBytes = System.Text.Encoding.ASCII.GetBytes(DataString);
-                DataRessieveTransmit_BoxBIN.Text += String.Format("Передача данных[{0}]:{1}" + Environment.NewLine, DateTime.Now, StrBytes.ToString());//не работает
+                StringBuilder sbb = new StringBuilder();
+                DataRessieveTransmit_BoxBIN.Text += String.Format("Передача данных[{0}]:" + Environment.NewLine, DateTime.Now);
+                foreach (byte b in StrBytes)
+                {
+                    sbb.Append(Convert.ToString(b, 2).PadLeft(8, '0')).Append(' ');
+                    
+                }
+                string binaryStr = sbb.ToString();
+                string mass_bin=null;
+                
+                for(int i=0;i<binaryStr.Length;i++)
+                {
+                    if(binaryStr[i]==' ')
+                    {
+                        mass_bin += binaryStr[i];
+                        DataRessieveTransmit_BoxBIN.Text +="0b"+ mass_bin + Environment.NewLine;
+                        mass_bin = null;
+                        continue;
+                    }
+                    mass_bin += binaryStr[i];
+                }
+               
                 CursorEndPoint();
 
                 BytesTransmit = Calculate_Byte(BytesTransmit, DataString);//подсчитываем кол-во байтов
